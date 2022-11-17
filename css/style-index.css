@@ -1,8 +1,7 @@
 /* main content */
 
 .hero {
-  background-color: #21D4FD;
-  background-image: linear-gradient(160deg, #21D4FD 0%, #8F0CD0 100%);
+  background-color: #E5E8E8;
   height: 100vh;
   width: 100%;
   display: grid; 
@@ -32,8 +31,7 @@
 
 .today { 
   grid-area: today; 
-  background-color: #FAD961;
-  background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
+  background-color: #2980B9;
   height: 100%;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
