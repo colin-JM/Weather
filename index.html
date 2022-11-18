@@ -7,19 +7,19 @@
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Weather</title>
-    <link rel="icon" href="content/logo.png">
+    <link rel="icon" href="content/website_icon.png">
     <link href="css/style-global.css" rel="stylesheet" type="text/css" />
     <link href="css/style-index.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
 
 <!-- main screen -->
   <section class="hero">
-    <div class="content-box">
+    <div class="content-box" id="content-box">
       <div class="locPrompt" id="locPrompt">
         <h1>We need your location</h1>
         <h3>Please grant us your geolocation so we can find your weather. Don't fret, we don't store your location or anything else from your computer.</h3>
@@ -27,14 +27,30 @@
       </div>
       <div class="inner-grid">
           <div class="today" id="today">
+            <span class="material-symbols-outlined" id="icon"></span>
             <h1 class="info" id="info"></h1>
               <h2 class="city" id="city"></h2>
-                <h3 class="sky" id="sky"></h3>
+                <h3 class="sky" id="sky">Loading Your Weather...</h3>
+                <h4 class="highLow" id="highLow"></h4>
+              <div class="dailyBoxes">
+                <div class="boxOne" id="boxOne"></div>
+                <div class="boxTwo" id="boxTwo"></div>
+              </div>
               <div id="message"></div>
             
           </div>
           <div class="forecast" id="forecast">
-            
+            <div class="weekBoxes">
+              <div class="day1" id="day1"></div>
+              <div class="day2" id="day2"></div>
+              <div class="day3" id="day3"></div>
+              <div class="day4" id="day4"></div>
+              <div class="day5" id="day5"></div>
+              <div class="search"></div>
+              <div class="stats"></div>
+              <div class="atribLogo"></div>
+              <div class="otherInfo"></div>
+            </div>
           </div>
       </div>
     </div>

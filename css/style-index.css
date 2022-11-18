@@ -17,14 +17,14 @@
   background-color: #FFE53B;
   background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
   border-radius: 25px;
-  margin: 10vh 20vw;
+  margin: 10vh 15vw;
 }
 
 .inner-grid {
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr; 
   grid-template-rows: 1fr; 
-  gap: 0px 0px; 
+  gap: 0px 3vw; 
   grid-template-areas: 
     "today forecast forecast"; 
   height: 100%;
@@ -33,8 +33,7 @@
 .today { 
   grid-area: today; 
   height: 100%;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-radius: 25px;
   background-color: transparent;
   background-image: none;
 }
@@ -42,28 +41,54 @@
 .forecast { 
   grid-area: forecast; 
   background-color: transparent;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-radius: 25px;
 }
+
+/* today */
 
 .info {
   text-align: center;
   font-size: 5vw;
   color: #fff;
-  margin-top: 30%;
+  margin-top: 3%;
+}
+
+#icon {
+  font-size: 5vw;
+  color: #fff;
+  margin: 10% auto 0% auto;
+  display: table;
+  text-align: center;
 }
 
 .city {
   text-align: center;
   margin: 1vh 2vw;
   color: #fff;
+  font-size: 1vw;
 }
 
 .sky {
-  color: #fff;
+  color: #000;
   text-align: center;
-  margin: 1vh 2vw;
+  margin: 1vh 1vw;
+  padding: 2vh 0vw;
+  background-color: #fff;
+  border-radius: 5px;
+  visibility: hidden;
 }
+
+.highLow {
+  color: #000;
+  text-align: center;
+  margin: 1vh 1vw;
+  padding: 2vh 0vw;
+  background-color: #fff;
+  border-radius: 5px;
+  visibility: hidden;
+}
+
+
 
 .locPrompt {
   position: absolute;
@@ -83,22 +108,177 @@
   margin-bottom: 2vh;
 }
 
-@media (max-width: 970px) {
+.dailyBoxes {  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 1vh;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "boxOne boxTwo";
+  height: 20%;
+  margin: 1vh 1vw;
+}
+
+.boxOne { 
+  background-color: #fff;
+  grid-area: boxOne; 
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.boxTwo {
+  background-color: #fff;
+  grid-area: boxTwo; 
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+
+/* scaling */
+
+@media (max-width: 380px) {
   .inner-grid {
   display: grid; 
   grid-template-columns: 1fr; 
   grid-template-rows: 1fr 1fr 1fr; 
-  gap: 0px 0px; 
+  gap: 5vh 0px; 
   grid-template-areas: 
     "today"
     "forecast"
     "forecast"; 
   }
   .forecast { grid-area: forecast; }
-  .today { grid-area: today; }
+  .today { 
+    grid-area: today; 
+    height: 90vh;
+  }
   .content-box {
   grid-area: content-box;
   border-radius: 25px;
   margin: 3vh 5vw;
+  height: 100%;
+  }
+  
+  #icon {
+    font-size: 20vw;
+  }
+
+  .info {
+    font-size: 25vw;
+  }
+
+  .city {
+    font-size: 5vw;
+  }
 }
+
+@media (max-width: 850px) {
+  .inner-grid {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 1fr 1fr; 
+  gap: 5vh 0px; 
+  grid-template-areas: 
+    "today"
+    "forecast"
+    "forecast"; 
+  }
+  .forecast { grid-area: forecast; }
+  .today { 
+    grid-area: today; 
+    height: 90vh;
+  }
+  .content-box {
+  grid-area: content-box;
+  border-radius: 25px;
+  margin: 3vh 5vw;
+  height: 100%;
+  }
+  
+  #icon {
+    font-size: 20vw;
+  }
+
+  .info {
+    font-size: 25vw;
+  }
+
+  .city {
+    font-size: 5vw;
+  }
+  .city {
+    margin: 1vh 2vw 5vh;
+  }
 }
+
+/* forecast */
+
+.weekBoxes {  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "search search search day1"
+    "stats stats stats day2"
+    "stats stats stats day3"
+    "stats stats stats day4"
+    "atribLogo otherInfo otherInfo day5";
+  height: 100%;
+  margin: 1vh 1vw;
+}
+
+.day1 { 
+  grid-area: day1; 
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+  height: 85%;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.day2 { 
+  grid-area: day2; 
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+  height: 85%;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.day3 { 
+  grid-area: day3; 
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+  height: 85%;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.day4 { 
+  grid-area: day4; 
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+  height: 85%;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.day5 { 
+  grid-area: day5; 
+  background-color: #21D4FD;
+  background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
+  height: 85%;
+  border-radius: 10px;
+  visibility: hidden;
+}
+
+.search { grid-area: search; }
+
+.stats { grid-area: stats; }
+
+.atribLogo { grid-area: atribLogo; }
+
+.otherInfo { grid-area: otherInfo; }
