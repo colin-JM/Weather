@@ -1,3 +1,5 @@
+<!--You may view the liscense for Open Meteo here: https://creativecommons.org/licenses/by/4.0/-->
+
 <!DOCTYPE html>
 <html>
 
@@ -17,21 +19,27 @@
 
 <!-- main screen -->
   <section class="hero">
-
     <div class="content-box">
+      <div class="locPrompt" id="locPrompt">
+        <h1>We need your location</h1>
+        <h3>Please grant us your geolocation so we can find your weather. Don't fret, we don't store your location or anything else from your computer.</h3>
+        <button id="show" class="button1">Find My Weather</button>
+      </div>
       <div class="inner-grid">
-          <div class="today">
-            <p class="info" id="info">
-              
-            </p>
+          <div class="today" id="today">
+            <h1 class="info" id="info"></h1>
+              <h2 class="city" id="city"></h2>
+                <h3 class="sky" id="sky"></h3>
+              <div id="message"></div>
+            
           </div>
-          <div class="forecast">
+          <div class="forecast" id="forecast">
             
           </div>
       </div>
     </div>
 
-    
+    <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
   </section>
   
 

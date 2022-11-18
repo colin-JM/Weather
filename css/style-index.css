@@ -14,7 +14,8 @@
 
 .content-box {
   grid-area: content-box;
-  background-color: #fff;
+  background-color: #FFE53B;
+  background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
   border-radius: 25px;
   margin: 10vh 20vw;
 }
@@ -31,9 +32,73 @@
 
 .today { 
   grid-area: today; 
-  background-color: #2980B9;
   height: 100%;
   border-top-left-radius: 25px;
   border-bottom-left-radius: 25px;
+  background-color: transparent;
+  background-image: none;
 }
-.forecast { grid-area: forecast; }
+
+.forecast { 
+  grid-area: forecast; 
+  background-color: transparent;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.info {
+  text-align: center;
+  font-size: 5vw;
+  color: #fff;
+  margin-top: 30%;
+}
+
+.city {
+  text-align: center;
+  margin: 1vh 2vw;
+  color: #fff;
+}
+
+.sky {
+  color: #fff;
+  text-align: center;
+  margin: 1vh 2vw;
+}
+
+.locPrompt {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.locPrompt h1 {
+  color: #fff;
+  font-size: 5vw;
+}
+
+.locPrompt h3 {
+  color: #fff;
+  margin-bottom: 2vh;
+}
+
+@media (max-width: 970px) {
+  .inner-grid {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "today"
+    "forecast"
+    "forecast"; 
+  }
+  .forecast { grid-area: forecast; }
+  .today { grid-area: today; }
+  .content-box {
+  grid-area: content-box;
+  border-radius: 25px;
+  margin: 3vh 5vw;
+}
+}
