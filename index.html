@@ -7,7 +7,7 @@
    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Weather</title>
-    <link rel="icon" href="content/website_icon.png">
+    <link rel="icon" href="images/icon.png">
     <link href="css/style-global.css" rel="stylesheet" type="text/css" />
     <link href="css/style-index.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -21,8 +21,8 @@
   <section class="hero">
     <div class="content-box" id="content-box">
       <div class="locPrompt" id="locPrompt">
-        <h1>We need your location</h1>
-        <h3>Please grant us your geolocation so we can find your weather. Don't fret, we don't store your location or anything else from your computer.</h3>
+        <h2>We need your location</h2>
+        <h3>Please grant us your geolocation so we can find your weather.<br></br>Don't fret, we don't store your location or anything else.</h3>
         <button id="show" class="button1">Find My Weather</button>
       </div>
       <div class="inner-grid">
@@ -30,11 +30,18 @@
             <span class="material-symbols-outlined" id="icon"></span>
             <h1 class="info" id="info"></h1>
               <h2 class="city" id="city"></h2>
+              <h2 class="feels-like" id="feels-like"></h2>
                 <h3 class="sky" id="sky">Loading Your Weather...</h3>
                 <h4 class="highLow" id="highLow"></h4>
               <div class="dailyBoxes">
-                <div class="boxOne" id="boxOne"></div>
-                <div class="boxTwo" id="boxTwo"></div>
+                <div class="boxOne" id="boxOne">
+                  <h5>Humidity</h5>
+                  <h3 class="humidity" id="humidity"></h3>
+                </div>
+                <div class="boxTwo" id="boxTwo">
+                  <h5>Wind</h5>
+                  <h3 class="wind" id="wind"></h3>
+                </div>
               </div>
               <div id="message"></div>
             

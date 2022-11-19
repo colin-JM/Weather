@@ -30,6 +30,11 @@
   height: 100%;
 }
 
+.locPrompt h2 {
+  color: #fff;
+  font-size: 3vw;
+}
+
 .today { 
   grid-area: today; 
   height: 100%;
@@ -48,9 +53,9 @@
 
 .info {
   text-align: center;
-  font-size: 5vw;
+  font-size: 4vw;
   color: #fff;
-  margin-top: 3%;
+  margin-top: 5%;
 }
 
 #icon {
@@ -66,6 +71,15 @@
   margin: 1vh 2vw;
   color: #fff;
   font-size: 1vw;
+  font-weight: 400;
+}
+
+.feels-like {
+  text-align: center;
+  margin: 1vh 2vw;
+  color: #fff;
+  font-size: 1vw;
+  font-weight: 600;
 }
 
 .sky {
@@ -88,6 +102,28 @@
   visibility: hidden;
 }
 
+.boxOne h5 {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.humidity {
+  text-align: center;
+  font-color: #000;
+  font-size: 2vw;
+}
+
+.boxTwo h5 {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.wind {
+  text-align: center;
+  font-color: #000;
+  font-size: 2vw;
+  margin-bottom: 0px;
+}
 
 
 .locPrompt {
@@ -279,6 +315,8 @@
 
 .stats { grid-area: stats; }
 
-.atribLogo { grid-area: atribLogo; }
+.atribLogo { 
+  grid-area: atribLogo;
+}
 
 .otherInfo { grid-area: otherInfo; }

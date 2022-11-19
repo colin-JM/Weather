@@ -1,6 +1,6 @@
 async function fetchData(latitude, longitude) {
   document.getElementById("sky").style.visibility = 'visible';
-    const res=await fetch ("https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&hourly=temperature_2m,apparent_temperature,precipitation,rain,showers,snowfall,snow_depth,freezinglevel_height,weathercode,pressure_msl,surface_pressure,cloudcover,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto");
+    const res=await fetch ("https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,showers,snowfall,snow_depth,freezinglevel_height,weathercode,pressure_msl,surface_pressure,cloudcover,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto");
     const record=await res.json();
 document.getElementById("info").innerHTML=Math.round(record.current_weather.temperature) + "°F";
   //
@@ -74,6 +74,18 @@ document.getElementById("info").innerHTML=Math.round(record.current_weather.temp
     document.getElementById("icon").innerHTML+=" severe_cold";
   }
   document.getElementById("highLow").innerHTML=record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
+
+  const wind = record.current_weather.windspeed;
+  document.getElementById("wind").innerHTML=wind + "mph";
+
+  const humidity = record.hourly.relativehumidity_2m[hour-1];
+  document.getElementById("humidity").innerHTML=humidity + "%";
+
+  const feelsLike = record.hourly.apparent_temperature[hour-1];
+  if (feelsLike < 32) {
+    document.getElementById("feels-like").innerHTML="Feels Like: " + feelsLike + "°F"
+  }
+  
   document.getElementById("highLow").style.visibility = "visible";
   document.getElementById("sky").style.visibility = "visible";
   document.getElementById("boxOne").style.visibility = "visible";
