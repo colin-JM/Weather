@@ -78,10 +78,10 @@ document.getElementById("info").innerHTML=Math.round(record.current_weather.temp
   const wind = record.current_weather.windspeed;
   document.getElementById("wind").innerHTML=wind + "mph";
 
-  const humidity = record.hourly.relativehumidity_2m[hour-1];
+  const humidity = record.hourly.relativehumidity_2m[hour];
   document.getElementById("humidity").innerHTML=humidity + "%";
 
-  const feelsLike = record.hourly.apparent_temperature[hour-1];
+  const feelsLike = record.hourly.apparent_temperature[hour];
   if (feelsLike < 32) {
     document.getElementById("feels-like").innerHTML="Feels Like: " + feelsLike + "°F"
   }
