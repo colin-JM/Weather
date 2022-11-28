@@ -1,9 +1,16 @@
+//display weather data and change other html assets
 async function fetchData(latitude, longitude) {
+
+  //get info from api
   document.getElementById("sky").style.visibility = 'visible';
     const res=await fetch ("https://api.open-meteo.com/v1/forecast?latitude=" + latitude + "&longitude=" + longitude + "&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation,rain,showers,snowfall,snow_depth,freezinglevel_height,weathercode,pressure_msl,surface_pressure,cloudcover,visibility&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,rain_sum,showers_sum,snowfall_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=auto");
     const record=await res.json();
-document.getElementById("info").innerHTML=Math.round(record.current_weather.temperature) + "°F";
-  //
+
+  //get current temp
+  let currentTemp = Math.round(record.current_weather.temperature);
+  document.getElementById("info").innerHTML=currentTemp + "°F";
+  
+  //gets time of day and sunset/sunrise (find if it is night or day)
   let hour = Number(record.current_weather.time.slice(11,13));
   let sunrise = Number(record.daily.sunrise[0].slice(11,13));
   let sunset = Number(record.daily.sunset[0].slice(11,13));
@@ -11,6 +18,17 @@ document.getElementById("info").innerHTML=Math.round(record.current_weather.temp
   if ((hour <= sunrise) || (hour >= sunset)) {
     night = true;
   }
+
+  //sets day background based on time of day
+  if ((hour < sunrise) || hour > sunset) {
+    document.getElementById("today").style.backgroundColor = "#283048";
+    document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #283048 0%, #859398 100%)";
+  } else if ((hour == sunrise)) {
+    document.getElementById("today").style.backgroundColor = "#F3904F";
+    document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #F3904F 0%, #3B4371 100%)";
+  }
+
+  //sets weather icon and weather event
   let weathercode = record.current_weather.weathercode;
   if (weathercode == 0) {
     if (night) {
@@ -70,22 +88,30 @@ document.getElementById("info").innerHTML=Math.round(record.current_weather.temp
     document.getElementById("sky").innerHTML="Severe Thunderstorms";
     document.getElementById("icon").innerHTML="thunderstorm";
   }
+
+  //severe cold event
   if (record.current_weather.temperature <= 0) {
     document.getElementById("icon").innerHTML+=" severe_cold";
   }
+
+  //displays max and min temps for current day
   document.getElementById("highLow").innerHTML=record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
 
+  //displays windspeed for current day
   const wind = record.current_weather.windspeed;
   document.getElementById("wind").innerHTML=wind + "mph";
 
+  //displays humidity for current day
   const humidity = record.hourly.relativehumidity_2m[hour];
   document.getElementById("humidity").innerHTML=humidity + "%";
 
+  //feels like temp for current time if feelsLike is below 32
   const feelsLike = record.hourly.apparent_temperature[hour];
   if (feelsLike < 32) {
     document.getElementById("feels-like").innerHTML="Feels Like: " + feelsLike + "°F"
   }
   
+  //hide & display HTML objects
   document.getElementById("highLow").style.visibility = "visible";
   document.getElementById("sky").style.visibility = "visible";
   document.getElementById("boxOne").style.visibility = "visible";
@@ -97,9 +123,12 @@ document.getElementById("info").innerHTML=Math.round(record.current_weather.temp
   document.getElementById("day5").style.visibility = "visible";
 }
 
+
+//long and lat to city - display
 async function getCity(latitude, longitude) {
     const res=await fetch ("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "8&localityLanguage=en");
     const record=await res.json();
+  let city = record.city;
   let country = ", " + record.countryCode;
   let subdivision = record.principalSubdivision;
   if (country == ", US") {
@@ -107,42 +136,48 @@ async function getCity(latitude, longitude) {
   }
   if (record.city === subdivision) {
     subdivision = "";
-    document.getElementById("city").innerHTML=record.city + country;
+    document.getElementById("city").innerHTML=city + country;
+  } else if (city == "") {
+    document.getElementById("city").innerHTML=subdivision + country;
   } else {
-    document.getElementById("city").innerHTML=record.city + ", " + subdivision + country;
+    document.getElementById("city").innerHTML=city + ", " + subdivision + country;
   }
 
 }
 
-    const message = document.querySelector('#city');
 
-    if (!navigator.geolocation) {
+//message (city or geolocation fail)
+const message = document.querySelector('#city');
+
+//removes html assets
+if (!navigator.geolocation) {
         message.textContent = `Your browser doesn't support Geolocation`;
         message.classList.add('error');
-    }
-    const btn = document.querySelector('#show');
-    btn.addEventListener('click', function () {
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
-      
+}
+const btn = document.querySelector('#show');
+btn.addEventListener('click', function () {
+  navigator.geolocation.getCurrentPosition(onSuccess, onError);
       document.getElementById("today").style.backgroundColor = "#21D4FD";
       document.getElementById("today").style.backgroundImage = "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)";
-      
       document.getElementById("forecast").style.backgroundColor = "#FFFFFF";
       document.getElementById("content-box").style.backgroundColor = "transparent";
       document.getElementById("content-box").style.backgroundImage = "none";
       document.getElementById("locPrompt").style.visibility = "hidden";
   
     });
-    function onSuccess(position) {
 
-        const {
-            latitude,
-            longitude
-        } = position.coords;
-        fetchData(latitude, longitude);
-        getCity(latitude, longitude);
-    }
-    function onError() {
-        message.classList.add('error');
-        message.textContent = `Failed to get your location!`;
-    }
+//on geolocation success, find weather data
+function onSuccess(position) {
+  const {
+    latitude,
+    longitude
+  } = position.coords;
+  fetchData(latitude, longitude);
+  getCity(latitude, longitude);
+}
+
+//prints failure on geolocation error
+function onError() {
+    message.classList.add('error');
+    message.textContent = `Failed to get your location!`;
+}
