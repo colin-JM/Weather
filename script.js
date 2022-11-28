@@ -18,18 +18,30 @@ async function fetchData(latitude, longitude) {
   if ((hour <= sunrise) || (hour >= sunset)) {
     night = true;
   }
+  let weathercode = record.current_weather.weathercode;
 
   //sets day background based on time of day
   if ((hour < sunrise) || hour > sunset) {
     document.getElementById("today").style.backgroundColor = "#283048";
     document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #283048 0%, #859398 100%)";
-  } else if ((hour == sunrise)) {
+  } else if (hour == sunrise) {
     document.getElementById("today").style.backgroundColor = "#F3904F";
     document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #F3904F 0%, #3B4371 100%)";
+  } else if (hour == sunset) {
+    document.getElementById("today").style.backgroundColor = "#0B486B";
+    document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #0B486B 0%, #F56217 100%)";
+  } else if ((weathercode >= 0) && (weathercode <= 2)) {
+    document.getElementById("today").style.backgroundColor = "#24C6DC";
+    document.getElementById("today").style.backgroundImage = "linear-gradient(168deg, #24C6DC 0%, #514A9D 100%)";
+  } else if ((weathercode == 71) || (weathercode == 73) || (weathercode == 75) || (weathercode == 77)) {
+    document.getElementById("today").style.backgroundColor = "#4CA1AF";
+    document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #4CA1AF 0%, #C4E0E5 100%)";
+  } else {
+    document.getElementById("today").style.backgroundColor = "#bbd2c5";
+    document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #bbd2c5 0%, #536976 100%)";
   }
 
   //sets weather icon and weather event
-  let weathercode = record.current_weather.weathercode;
   if (weathercode == 0) {
     if (night) {
       document.getElementById("sky").innerHTML="Clear";
@@ -105,10 +117,13 @@ async function fetchData(latitude, longitude) {
   const humidity = record.hourly.relativehumidity_2m[hour];
   document.getElementById("humidity").innerHTML=humidity + "%";
 
-  //feels like temp for current time if feelsLike is below 32
+  //feels like temp for current time if feelsLike is below 32 and total precip
   const feelsLike = record.hourly.apparent_temperature[hour];
+  const maxWindGusts = record.daily.windgusts_10m_max[0];
   if (feelsLike < 32) {
-    document.getElementById("feels-like").innerHTML="Feels Like: " + feelsLike + "°F"
+    document.getElementById("feels-like").innerHTML="Feels Like: " + feelsLike + "°F / Gusts: " + maxWindGusts + "mph";
+  } else {
+     document.getElementById("feels-like").innerHTML="Wind Gusts: " + maxWindGusts + "mph";
   }
   
   //hide & display HTML objects
@@ -136,29 +151,31 @@ async function getCity(latitude, longitude) {
   }
   if (record.city === subdivision) {
     subdivision = "";
-    document.getElementById("city").innerHTML=city + country;
+    document.getElementById("city").innerHTML = city + country;
   } else if (city == "") {
-    document.getElementById("city").innerHTML=subdivision + country;
+    document.getElementById("city").innerHTML= subdivision + country;
   } else {
-    document.getElementById("city").innerHTML=city + ", " + subdivision + country;
+    document.getElementById("city").innerHTML = city + ", " + subdivision + country;
+  }
+
+  //fix if there is no city and no region
+  if ((city == "") && (subdivision == "")) {
+    document.getElementById("city").innerHTML = record.countryName;
   }
 
 }
 
 
-//message (city or geolocation fail)
-const message = document.querySelector('#city');
 
 //removes html assets
 if (!navigator.geolocation) {
-        message.textContent = `Your browser doesn't support Geolocation`;
-        message.classList.add('error');
+        message.textContent = `Failed to get your location!`;
 }
 const btn = document.querySelector('#show');
 btn.addEventListener('click', function () {
   navigator.geolocation.getCurrentPosition(onSuccess, onError);
-      document.getElementById("today").style.backgroundColor = "#21D4FD";
-      document.getElementById("today").style.backgroundImage = "linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)";
+      document.getElementById("today").style.backgroundColor = "#fff";
+      document.getElementById("today").style.backgroundImage = "linear-gradient(19deg, #fff 0%, #fff 100%)";
       document.getElementById("forecast").style.backgroundColor = "#FFFFFF";
       document.getElementById("content-box").style.backgroundColor = "transparent";
       document.getElementById("content-box").style.backgroundImage = "none";
@@ -178,6 +195,5 @@ function onSuccess(position) {
 
 //prints failure on geolocation error
 function onError() {
-    message.classList.add('error');
     message.textContent = `Failed to get your location!`;
 }

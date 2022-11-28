@@ -68,7 +68,7 @@
 
 .city {
   text-align: center;
-  margin: 1vh 2vw;
+  margin: 1vh 1.5vw;
   color: #fff;
   font-size: 1vw;
   font-weight: 400;
@@ -76,7 +76,7 @@
 
 .feels-like {
   text-align: center;
-  margin: 1vh 2vw;
+  margin: 1vh 1vw;
   color: #fff;
   font-size: 1vw;
   font-weight: 600;
