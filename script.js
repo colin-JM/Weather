@@ -100,16 +100,16 @@ document.getElementById("info").innerHTML=Math.round(record.current_weather.temp
 async function getCity(latitude, longitude) {
     const res=await fetch ("https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=" + latitude + "&longitude=" + longitude + "8&localityLanguage=en");
     const record=await res.json();
-  let country = record.countryCode;
+  let country = ", " + record.countryCode;
   let subdivision = record.principalSubdivision;
-  if (country == "US") {
-    country = "";
+  if (country == ", US") {
+    country = " ";
   }
   if (record.city === subdivision) {
     subdivision = "";
-    document.getElementById("city").innerHTML=record.city + ", " +   country;
+    document.getElementById("city").innerHTML=record.city + country;
   } else {
-    document.getElementById("city").innerHTML=record.city + ", " + subdivision + ", " + country;
+    document.getElementById("city").innerHTML=record.city + ", " + subdivision + country;
   }
 
 }
