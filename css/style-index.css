@@ -109,7 +109,7 @@
 
 .humidity {
   text-align: center;
-  font-color: #000;
+  color: #000;
   font-size: 2vw;
 }
 
@@ -120,7 +120,7 @@
 
 .wind {
   text-align: center;
-  font-color: #000;
+  color: #000;
   font-size: 2vw;
   margin-bottom: 0px;
 }
@@ -173,7 +173,7 @@
 
 /* scaling */
 
-@media (max-width: 380px) {
+@media only screen and (max-width: 850px) {
   .inner-grid {
   display: grid; 
   grid-template-columns: 1fr; 
@@ -206,30 +206,43 @@
 
   .city {
     font-size: 5vw;
+    margin: 1vh 2vw 5vh;
+  }
+  
+  .humidity {
+    font-size: 10vw;
+  }
+  
+  .wind {
+    font-size: 10vw;
+  }
+  
+  .feels-like {
+    font-size: 4vw;
   }
 }
 
-@media (max-width: 850px) {
+@media only screen and (max-width: 380px) {
   .inner-grid {
   display: grid; 
   grid-template-columns: 1fr; 
-  grid-template-rows: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
   gap: 5vh 0px; 
   grid-template-areas: 
     "today"
-    "forecast"
-    "forecast"; 
+    "forecast";
+  height: 200vh;
   }
   .forecast { grid-area: forecast; }
   .today { 
     grid-area: today; 
-    height: 90vh;
+    height: 100%;
   }
   .content-box {
-  grid-area: content-box;
-  border-radius: 25px;
-  margin: 3vh 5vw;
-  height: 100%;
+    grid-area: content-box;
+    border-radius: 25px;
+    margin: 3vh 5vw;
+    height: 100%;
   }
   
   #icon {
@@ -241,10 +254,20 @@
   }
 
   .city {
-    font-size: 5vw;
+    font-size: 4vw;
+    margin-bottom: 1vh;
   }
-  .city {
-    margin: 1vh 2vw 5vh;
+  
+  .humidity {
+    font-size: 10vw;
+  }
+  
+  .wind {
+    font-size: 10vw;
+  }
+
+  .feels-like {
+    font-size: 4vw;
   }
 }
 
