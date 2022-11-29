@@ -17,16 +17,16 @@
   background-color: #FFE53B;
   background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
   border-radius: 25px;
-  margin: 10vh 15vw;
+  margin: 10vh 5vw;
 }
 
 .inner-grid {
   display: grid; 
-  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr; 
   grid-template-rows: 1fr; 
   gap: 0px 3vw; 
   grid-template-areas: 
-    "today forecast forecast"; 
+    "today forecast forecast forecast"; 
   height: 100%;
 }
 
@@ -251,23 +251,22 @@
 /* forecast */
 
 .weekBoxes {  
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas:
-    "search search search day1"
-    "stats stats stats day2"
-    "stats stats stats day3"
-    "stats stats stats day4"
-    "atribLogo otherInfo otherInfo day5";
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+  gap: 0px 1vw; 
+  grid-template-areas: 
+    "searchBar searchBar searchBar searchBar logo"
+    "weatherData weatherData weatherData weatherData weatherData"
+    "weatherData weatherData weatherData weatherData weatherData"
+    "dayOne dayTwo dayThree dayFour dayFive"
+    "dayOne dayTwo dayThree dayFour dayFive"; 
   height: 100%;
   margin: 1vh 1vw;
 }
 
-.day1 { 
-  grid-area: day1; 
+.dayOne { 
+  grid-area: dayOne; 
   background-color: #21D4FD;
   background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   height: 85%;
@@ -275,8 +274,8 @@
   visibility: hidden;
 }
 
-.day2 { 
-  grid-area: day2; 
+.dayTwo { 
+  grid-area: dayTwo; 
   background-color: #21D4FD;
   background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   height: 85%;
@@ -284,8 +283,8 @@
   visibility: hidden;
 }
 
-.day3 { 
-  grid-area: day3; 
+.dayThree { 
+  grid-area: dayThree; 
   background-color: #21D4FD;
   background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   height: 85%;
@@ -293,8 +292,8 @@
   visibility: hidden;
 }
 
-.day4 { 
-  grid-area: day4; 
+.dayFour { 
+  grid-area: dayFour; 
   background-color: #21D4FD;
   background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   height: 85%;
@@ -302,8 +301,8 @@
   visibility: hidden;
 }
 
-.day5 { 
-  grid-area: day5; 
+.dayFive { 
+  grid-area: dayFive; 
   background-color: #21D4FD;
   background-image: linear-gradient(19deg, #21D4FD 0%, #B721FF 100%);
   height: 85%;
@@ -311,12 +310,6 @@
   visibility: hidden;
 }
 
-.search { grid-area: search; }
-
-.stats { grid-area: stats; }
-
-.atribLogo { 
-  grid-area: atribLogo;
-}
-
-.otherInfo { grid-area: otherInfo; }
+.searchBar { grid-area: searchBar; }
+.logo { grid-area: logo; }
+.weatherData { grid-area: weatherData; }

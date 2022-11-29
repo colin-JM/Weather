@@ -44,61 +44,61 @@ async function fetchData(latitude, longitude) {
   //sets weather icon and weather event
   if (weathercode == 0) {
     if (night) {
-      document.getElementById("sky").innerHTML="Clear";
-      document.getElementById("icon").innerHTML="clear_night";
+      document.getElementById("sky").innerHTML = "Clear";
+      document.getElementById("icon").innerHTML = "clear_night";
     } else {
-      document.getElementById("sky").innerHTML="Sunny";
-      document.getElementById("icon").innerHTML="sunny";
+      document.getElementById("sky").innerHTML = "Sunny";
+      document.getElementById("icon").innerHTML = "sunny";
     }
   } else if ((weathercode == 1) || (weathercode == 2)) {
     if (night) {
-      document.getElementById("icon").innerHTML="partly_cloudy_night";
+      document.getElementById("icon").innerHTML = "partly_cloudy_night";
     } else {
-      document.getElementById("icon").innerHTML="partly_cloudy_day";
+      document.getElementById("icon").innerHTML = "partly_cloudy_day";
     }
-    document.getElementById("sky").innerHTML="Partly Cloudy";
+    document.getElementById("sky").innerHTML = "Partly Cloudy";
   } else if (weathercode == 3) {
-    document.getElementById("sky").innerHTML="Cloudy";
-    document.getElementById("icon").innerHTML="cloudy";
+    document.getElementById("sky").innerHTML = "Cloudy";
+    document.getElementById("icon").innerHTML = "cloudy";
   } else if ((weathercode == 45) || (weathercode == 48)) {
-    document.getElementById("sky").innerHTML="Foggy";
-    document.getElementById("icon").innerHTML="foggy";
+    document.getElementById("sky").innerHTML = "Foggy";
+    document.getElementById("icon").innerHTML = "foggy";
   } else if ((weathercode == 51) || (weathercode == 53) || (weathercode == 55)) {
-    document.getElementById("sky").innerHTML="Light Rain";
+    document.getElementById("sky").innerHTML = "Light Rain";
     document.getElementById("icon").innerHTML="rainy";
   } else if ((weathercode == 56) || (weathercode == 57)) {
-    document.getElementById("sky").innerHTML="Light Freezing Rain";
-    document.getElementById("icon").innerHTML="ac_unit";
+    document.getElementById("sky").innerHTML = "Light Freezing Rain";
+    document.getElementById("icon").innerHTML = "ac_unit";
   } else if ((weathercode == 61) || (weathercode == 63) || (weathercode == 65)) {
-    document.getElementById("sky").innerHTML="Raining";
-    document.getElementById("icon").innerHTML="rainy";
+    document.getElementById("sky").innerHTML = "Raining";
+    document.getElementById("icon").innerHTML = "rainy";
   } else if ((weathercode == 66) || (weathercode == 67)) {
-    document.getElementById("sky").innerHTML="Freezing Rain";
-    document.getElementById("icon").innerHTML="ac_unit";
+    document.getElementById("sky").innerHTML = "Freezing Rain";
+    document.getElementById("icon").innerHTML = "ac_unit";
   } else if (weathercode == 71) {
-    document.getElementById("sky").innerHTML="Light Snow";
-    document.getElementById("icon").innerHTML="weather_snowy";
+    document.getElementById("sky").innerHTML = "Light Snow";
+    document.getElementById("icon").innerHTML = "weather_snowy";
   } else if (weathercode == 73) {
-    document.getElementById("sky").innerHTML="Snowing";
-    document.getElementById("icon").innerHTML="weather_snowy";
+    document.getElementById("sky").innerHTML = "Snowing";
+    document.getElementById("icon").innerHTML = "weather_snowy";
   } else if (weathercode == 75) {
-    document.getElementById("sky").innerHTML="Heavy Snow";
-    document.getElementById("icon").innerHTML="weather_snowy";
+    document.getElementById("sky").innerHTML = "Heavy Snow";
+    document.getElementById("icon").innerHTML = "weather_snowy";
   } else if (weathercode == 77) {
-    document.getElementById("sky").innerHTML="Snow Grains";
-    document.getElementById("icon").innerHTML="grain";
+    document.getElementById("sky").innerHTML = "Snow Grains";
+    document.getElementById("icon").innerHTML = "grain";
   } else if ((weathercode == 80) || (weathercode == 81) || (weathercode == 82)) {
-    document.getElementById("sky").innerHTML="Rain Showers";
-    document.getElementById("icon").innerHTML="rainy";
+    document.getElementById("sky").innerHTML = "Rain Showers";
+    document.getElementById("icon").innerHTML = "rainy";
   } else if ((weathercode == 85) || (weathercode == 86)) {
-    document.getElementById("sky").innerHTML="Snow Showers";
-    document.getElementById("icon").innerHTML="weather_snowy";
+    document.getElementById("sky").innerHTML = "Snow Showers";
+    document.getElementById("icon").innerHTML = "weather_snowy";
   } else if (weathercode == 95) {
-    document.getElementById("sky").innerHTML="Thunderstorms";
-    document.getElementById("icon").innerHTML="thunderstorm";
+    document.getElementById("sky").innerHTML = "Thunderstorms";
+    document.getElementById("icon").innerHTML = "thunderstorm";
   } else if ((weathercode == 96) || (weathercode == 99)) {
-    document.getElementById("sky").innerHTML="Severe Thunderstorms";
-    document.getElementById("icon").innerHTML="thunderstorm";
+    document.getElementById("sky").innerHTML = "Severe Thunderstorms";
+    document.getElementById("icon").innerHTML = "thunderstorm";
   }
 
   //severe cold event
@@ -107,7 +107,7 @@ async function fetchData(latitude, longitude) {
   }
 
   //displays max and min temps for current day
-  document.getElementById("highLow").innerHTML=record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
+  document.getElementById("highLow").innerHTML = record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
 
   //displays windspeed for current day
   const wind = record.current_weather.windspeed;
@@ -121,9 +121,9 @@ async function fetchData(latitude, longitude) {
   const feelsLike = record.hourly.apparent_temperature[hour];
   const maxWindGusts = record.daily.windgusts_10m_max[0];
   if (feelsLike < 32) {
-    document.getElementById("feels-like").innerHTML="Feels Like: " + feelsLike + "°F / Gusts: " + maxWindGusts + "mph";
+    document.getElementById("feels-like").innerHTML = "Feels Like: " + feelsLike + "°F / Gusts: " + maxWindGusts + "mph";
   } else {
-     document.getElementById("feels-like").innerHTML="Wind Gusts: " + maxWindGusts + "mph";
+     document.getElementById("feels-like").innerHTML = "Sunrise: " + record.daily.sunrise[0].slice(11,16) + " / Sunset: " + record.daily.sunset[0].slice(11,16);
   }
   
   //hide & display HTML objects
@@ -131,11 +131,11 @@ async function fetchData(latitude, longitude) {
   document.getElementById("sky").style.visibility = "visible";
   document.getElementById("boxOne").style.visibility = "visible";
   document.getElementById("boxTwo").style.visibility = "visible";
-  document.getElementById("day1").style.visibility = "visible";
-  document.getElementById("day2").style.visibility = "visible";
-  document.getElementById("day3").style.visibility = "visible";
-  document.getElementById("day4").style.visibility = "visible";
-  document.getElementById("day5").style.visibility = "visible";
+  document.getElementById("dayOne").style.visibility = "visible";
+  document.getElementById("dayTwo").style.visibility = "visible";
+  document.getElementById("dayThree").style.visibility = "visible";
+  document.getElementById("dayFour").style.visibility = "visible";
+  document.getElementById("dayFive").style.visibility = "visible";
 }
 
 
