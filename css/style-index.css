@@ -315,3 +315,11 @@
 .searchBar { grid-area: searchBar; }
 .logo { grid-area: logo; }
 .weatherData { grid-area: weatherData; }
+
+.dayOfWeek {
+  text-align: center;
+  margin: 1vh 1.5vw;
+  color: #000;
+  font-size: 1vw;
+  font-weight: 400;
+}

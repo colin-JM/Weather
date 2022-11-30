@@ -43,7 +43,7 @@ async function fetchData(latitude, longitude) {
     document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #bbd2c5 0%, #536976 100%)";
   }
   
-  setIconWMO(night, record);
+  setIconWMO(night, record, dayOfWeek);
 
   //severe cold event
   if (record.current_weather.temperature <= 0) {
@@ -141,7 +141,7 @@ function onError() {
 }
 
 //WMO Code Output Function
-function setIconWMO(valueNight, record) {
+function setIconWMO(valueNight, record, dayOfWeek) {
   let textValue = "NULL";
   let idValue = "NULL";
   let valueWMO = 0;
@@ -212,19 +212,49 @@ function setIconWMO(valueNight, record) {
       idValue = "thunderstorm";
     }
 
+    
     if (i == 0) {
       document.getElementById("sky").innerHTML = textValue;
       document.getElementById("icon").innerHTML = idValue;
     } else if (i == 1) {
       document.getElementById("dayOneIcon").innerHTML = idValue;
+      document.getElementById("dayOneDate").innerHTML = getDayString(dayOfWeek);
     } else if (i == 2) {
       document.getElementById("dayTwoIcon").innerHTML = idValue;
+      document.getElementById("dayTwoDate").innerHTML = getDayString(dayOfWeek);
     } else if (i == 3) {
       document.getElementById("dayThreeIcon").innerHTML = idValue;
+      document.getElementById("dayThreeDate").innerHTML = getDayString(dayOfWeek);
     } else if (i == 4) {
       document.getElementById("dayFourIcon").innerHTML = idValue;
+      document.getElementById("dayFourDate").innerHTML = getDayString(dayOfWeek);
     } else {
       document.getElementById("dayFiveIcon").innerHTML = idValue;
+      document.getElementById("dayFiveDate").innerHTML = getDayString(dayOfWeek);
+    }
+    dayOfWeek++;
+    if (dayOfWeek == 7) {
+      dayOfWeek = 0;
     }
   }
+}
+
+function getDayString(dow) {
+  let dows = "";
+  if (dow == 0) {
+    dows = "Sunday";
+  } else if (dow == 1) {
+    dows = "Monday";
+  } else if (dow == 2) {
+    dows = "Tuesday";
+  } else if (dow == 3) {
+    dows = "Wednesday";
+  } else if (dow == 4) {
+    dows = "Thursday";
+  } else if (dow == 5) {
+    dows = "Friday";
+  } else if (dow == 6) {
+    dows = "Saturday";
+  }
+  return dows;
 }
