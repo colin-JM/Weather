@@ -14,6 +14,8 @@ async function fetchData(latitude, longitude) {
   let hour = Number(record.current_weather.time.slice(11,13));
   let sunrise = Number(record.daily.sunrise[0].slice(11,13));
   let sunset = Number(record.daily.sunset[0].slice(11,13));
+  const d = new Date();
+  let dayOfWeek = d.getDay();
   let night = false;
   if ((hour <= sunrise) || (hour >= sunset)) {
     night = true;
@@ -40,66 +42,8 @@ async function fetchData(latitude, longitude) {
     document.getElementById("today").style.backgroundColor = "#bbd2c5";
     document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #bbd2c5 0%, #536976 100%)";
   }
-
-  //sets weather icon and weather event
-  if (weathercode == 0) {
-    if (night) {
-      document.getElementById("sky").innerHTML = "Clear";
-      document.getElementById("icon").innerHTML = "clear_night";
-    } else {
-      document.getElementById("sky").innerHTML = "Sunny";
-      document.getElementById("icon").innerHTML = "sunny";
-    }
-  } else if ((weathercode == 1) || (weathercode == 2)) {
-    if (night) {
-      document.getElementById("icon").innerHTML = "partly_cloudy_night";
-    } else {
-      document.getElementById("icon").innerHTML = "partly_cloudy_day";
-    }
-    document.getElementById("sky").innerHTML = "Partly Cloudy";
-  } else if (weathercode == 3) {
-    document.getElementById("sky").innerHTML = "Cloudy";
-    document.getElementById("icon").innerHTML = "cloudy";
-  } else if ((weathercode == 45) || (weathercode == 48)) {
-    document.getElementById("sky").innerHTML = "Foggy";
-    document.getElementById("icon").innerHTML = "foggy";
-  } else if ((weathercode == 51) || (weathercode == 53) || (weathercode == 55)) {
-    document.getElementById("sky").innerHTML = "Light Rain";
-    document.getElementById("icon").innerHTML="rainy";
-  } else if ((weathercode == 56) || (weathercode == 57)) {
-    document.getElementById("sky").innerHTML = "Light Freezing Rain";
-    document.getElementById("icon").innerHTML = "ac_unit";
-  } else if ((weathercode == 61) || (weathercode == 63) || (weathercode == 65)) {
-    document.getElementById("sky").innerHTML = "Raining";
-    document.getElementById("icon").innerHTML = "rainy";
-  } else if ((weathercode == 66) || (weathercode == 67)) {
-    document.getElementById("sky").innerHTML = "Freezing Rain";
-    document.getElementById("icon").innerHTML = "ac_unit";
-  } else if (weathercode == 71) {
-    document.getElementById("sky").innerHTML = "Light Snow";
-    document.getElementById("icon").innerHTML = "weather_snowy";
-  } else if (weathercode == 73) {
-    document.getElementById("sky").innerHTML = "Snowing";
-    document.getElementById("icon").innerHTML = "weather_snowy";
-  } else if (weathercode == 75) {
-    document.getElementById("sky").innerHTML = "Heavy Snow";
-    document.getElementById("icon").innerHTML = "weather_snowy";
-  } else if (weathercode == 77) {
-    document.getElementById("sky").innerHTML = "Snow Grains";
-    document.getElementById("icon").innerHTML = "grain";
-  } else if ((weathercode == 80) || (weathercode == 81) || (weathercode == 82)) {
-    document.getElementById("sky").innerHTML = "Rain Showers";
-    document.getElementById("icon").innerHTML = "rainy";
-  } else if ((weathercode == 85) || (weathercode == 86)) {
-    document.getElementById("sky").innerHTML = "Snow Showers";
-    document.getElementById("icon").innerHTML = "weather_snowy";
-  } else if (weathercode == 95) {
-    document.getElementById("sky").innerHTML = "Thunderstorms";
-    document.getElementById("icon").innerHTML = "thunderstorm";
-  } else if ((weathercode == 96) || (weathercode == 99)) {
-    document.getElementById("sky").innerHTML = "Severe Thunderstorms";
-    document.getElementById("icon").innerHTML = "thunderstorm";
-  }
+  
+  setIconWMO(night, record);
 
   //severe cold event
   if (record.current_weather.temperature <= 0) {
@@ -165,8 +109,6 @@ async function getCity(latitude, longitude) {
 
 }
 
-
-
 //removes html assets
 if (!navigator.geolocation) {
         message.textContent = `Failed to get your location!`;
@@ -196,4 +138,93 @@ function onSuccess(position) {
 //prints failure on geolocation error
 function onError() {
     message.textContent = `Failed to get your location!`;
+}
+
+//WMO Code Output Function
+function setIconWMO(valueNight, record) {
+  let textValue = "NULL";
+  let idValue = "NULL";
+  let valueWMO = 0;
+  for (let i=0; i < 6; i++) {
+    textValue = "NULL";
+    idValue = "NULL";
+    if (i == 0) {
+      valueWMO = record.current_weather.weathercode;
+    } else {
+      valueWMO = record.daily.weathercode[i];
+    }
+    if (valueWMO == 0) {
+      if (valueNight && (i == 0)) {
+        textValue = "Clear";
+        idValue = "clear_night";
+      } else {
+        textValue = "Sunny";
+        idValue = "sunny";
+      }
+    } else if ((valueWMO == 1) || (valueWMO == 2)) {
+      if (valueNight && (i == 0)) {
+        idValue = "partly_cloudy_night";
+      } else {
+        idValue = "partly_cloudy_day";
+      }
+       textValue = "Partly Cloudy";
+    } else if (valueWMO == 3) {
+      textValue = "Cloudy";
+      idValue = "cloudy";
+    } else if ((valueWMO == 45) || (valueWMO == 48)) {
+      textValue = "Foggy";
+      idValue = "foggy";
+    } else if ((valueWMO == 51) || (valueWMO == 53) || (valueWMO == 55)) {
+      textValue = "Light Rain";
+      idValue = "rainy";
+    } else if ((valueWMO == 56) || (valueWMO == 57)) {
+      textValue = "Light Freezing Rain";
+      idValue = "ac_unit";
+    } else if ((valueWMO == 61) || (valueWMO == 63) || (valueWMO == 65)) {
+      textValue = "Raining";
+      idValue = "rainy";
+    } else if ((valueWMO == 66) || (valueWMO == 67)) {
+      textValue = "Freezing Rain";
+      idValue = "ac_unit";
+    } else if (valueWMO == 71) {
+      textValue = "Light Snow";
+      idValue = "weather_snowy";
+    } else if (valueWMO == 73) {
+      textValue = "Snowing";
+      idValue = "weather_snowy";
+    } else if (valueWMO == 75) {
+      textValue = "Heavy Snow";
+      idValue = "weather_snowy";
+    } else if (valueWMO == 77) {
+      textValue = "Snow Grains";
+      idValue = "grain";
+    } else if ((valueWMO == 80) || (valueWMO == 81) || (valueWMO == 82)) {
+      textValue = "Rain Showers";
+      idValue = "rainy";
+    } else if ((weathercode == 85) || (weathercode == 86)) {
+      textValue = "Snow Showers";
+      idValue = "weather_snowy";
+    } else if (weathercode == 95) {
+      textValue = "Thunderstorms";
+      idValue = "thunderstorm";
+    } else if ((weathercode == 96) || (weathercode == 99)) {
+      textValue = "Severe Thunderstorms";
+      idValue = "thunderstorm";
+    }
+
+    if (i == 0) {
+      document.getElementById("sky").innerHTML = textValue;
+      document.getElementById("icon").innerHTML = idValue;
+    } else if (i == 1) {
+      document.getElementById("dayOneIcon").innerHTML = idValue;
+    } else if (i == 2) {
+      document.getElementById("dayTwoIcon").innerHTML = idValue;
+    } else if (i == 3) {
+      document.getElementById("dayThreeIcon").innerHTML = idValue;
+    } else if (i == 4) {
+      document.getElementById("dayFourIcon").innerHTML = idValue;
+    } else {
+      document.getElementById("dayFiveIcon").innerHTML = idValue;
+    }
+  }
 }
