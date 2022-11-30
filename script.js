@@ -54,7 +54,7 @@ async function fetchData(latitude, longitude) {
   document.getElementById("highLow").innerHTML = record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
 
   //displays windspeed for current day
-  const wind = record.current_weather.windspeed;
+  let wind = Math.round(record.current_weather.windspeed);
   document.getElementById("wind").innerHTML=wind + "mph";
 
   //displays humidity for current day
@@ -65,7 +65,7 @@ async function fetchData(latitude, longitude) {
   const feelsLike = record.hourly.apparent_temperature[hour];
   const maxWindGusts = record.daily.windgusts_10m_max[0];
   if (feelsLike < 32) {
-    document.getElementById("feels-like").innerHTML = "Feels Like: " + feelsLike + "°F / Gusts: " + maxWindGusts + "mph";
+    document.getElementById("feels-like").innerHTML = "Feels Like: " + feelsLike + "°F / Gusts: " + Math.round(maxWindGusts) + "mph";
   } else {
      document.getElementById("feels-like").innerHTML = "Sunrise: " + record.daily.sunrise[0].slice(11,16) + " / Sunset: " + record.daily.sunset[0].slice(11,16);
   }
