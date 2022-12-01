@@ -203,13 +203,13 @@ function setIconWMO(valueNight, record, dayOfWeek) {
     } else if ((valueWMO == 80) || (valueWMO == 81) || (valueWMO == 82)) {
       textValue = "Rain Showers";
       idValue = "rainy";
-    } else if ((weathercode == 85) || (weathercode == 86)) {
+    } else if ((valueWMO == 85) || (valueWMO == 86)) {
       textValue = "Snow Showers";
       idValue = "weather_snowy";
-    } else if (weathercode == 95) {
+    } else if (valueWMO == 95) {
       textValue = "Thunderstorms";
       idValue = "thunderstorm";
-    } else if ((weathercode == 96) || (weathercode == 99)) {
+    } else if ((valueWMO == 96) || (valueWMO == 99)) {
       textValue = "Severe Thunderstorms";
       idValue = "thunderstorm";
     }
@@ -263,33 +263,61 @@ function getDayString(dow) {
 
 //finds the most commonly occouring WMO code (wip)
 function findWMOAverage(day, rcrd) {
-  let startingIndex = 0;
+  let curr = '{"weatherCurr":[' +
+'{"weatherType":45,"occurrences":0 },' +
+'{"weatherType":51,"occurrences":0 },' +
+'{"weatherType":56,"occurrences":0 }, ' +
+'{"weatherType":85,"occurrences":0 },' +
+'{"weatherType":77,"occurrences":0 },' +
+'{"weatherType":96,"occurrences":0 }]}';
+  const obj = JSON.parse(curr);
+ //foggy, rainy, freezing rain, weather snowy, grains, thunderstorms
+  let mf = 1;
+  let mff, item, secondItem, valueWMO, startingIndex = 0;
   for (let i = 0; i < day; i++) {
     startingIndex += 24;
   }
-  let mf = 1;
-  let m = 0;
-  let item = 0;
   for (let i=0; i<24; i++) {
+    valueWMO = rcrd.hourly.weathercode[i+startingIndex];
+    if ((valueWMO == 45) || (valueWMO == 48)) {
+      obj.weatherCurr[0].occurrences++;
+    } else if ((valueWMO == 51) || (valueWMO == 53) || (valueWMO == 55) || (valueWMO == 61) || (valueWMO == 63) || (valueWMO == 65)) {
+      obj.weatherCurr[1].occurrences++;
+    } else if ((valueWMO == 56) || (valueWMO == 57) || (valueWMO == 66) || (valueWMO == 67)) {
+      obj.weatherCurr[2].occurrences++;
+    } else if ((valueWMO == 85) || (valueWMO == 86) || (valueWMO == 73) || (valueWMO == 75) || (valueWMO == 71)) {
+      obj.weatherCurr[3].occurrences++;
+    } else if (valueWMO == 77) {
+      obj.weatherCurr[4].occurrences++;
+    } else if ((valueWMO == 96) || (valueWMO == 99) || (valueWMO == 95)) {
+      obj.weatherCurr[5].occurrences++;
+    }
     for (let j=i; j<24; j++) {
       if (rcrd.hourly.weathercode[i+startingIndex] == rcrd.hourly.weathercode[j+startingIndex]) {
-        m++;
-        if (mf < m){
-          mf = m; 
+        mff++;
+        if (mf < mff){
+          mf = mff; 
           item = rcrd.hourly.weathercode[i+startingIndex];
         }
       }
     }
-    m=0;
+    mff = 0;
   }
-  /*   Create a system that will return the weathercode of a weather event if it occours for at least 6 hours
-  if ((item == 45) || (item == 48) || (item == 51) || (item == 53) || (item == 55) || (item == 56) || (item == 57) || 
-     (item == 61) || (item == 63) || (item == 65) || (item == 66) || (item == 67) || (item == 71) || (item == 73) || (item == 75) || 
-     (item == 77) || (item == 80) || (item == 81) || (item == 82) || (item == 85) || 
-      (item == 86) || (item == 95) || (item == 96) || (item == 99)) {
-    if (mf > 6) {
-      
+  mf = 1;
+  mff = 0;
+  for (let i=0; i<6; i++) {
+      if (obj.weatherCurr[i].occurrences > mf) {
+          mf = obj.weatherCurr[i].occurrences;
+          secondItem = obj.weatherCurr[i].weatherType;
+      }
+    mff = 0;
+  }
+  if (secondItem == 45) {
+    if (mf >= 10) {
+      item = secondItem;
     }
-  }*/
+  } else if (mf >= 6) {
+    item = secondItem;
+  }
   return item;
 }
