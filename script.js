@@ -43,7 +43,7 @@ async function fetchData(latitude, longitude) {
     document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #bbd2c5 0%, #536976 100%)";
   }
   
-  setIconWMO(night, record, dayOfWeek);
+  setIconWMO(night, record, dayOfWeek, hour);
 
   //severe cold event
   if (record.current_weather.temperature <= 0) {
@@ -141,7 +141,7 @@ function onError() {
 }
 
 //WMO Code Output Function
-function setIconWMO(valueNight, record, dayOfWeek) {
+function setIconWMO(valueNight, record, dayOfWeek, hour) {
   let textValue = "NULL";
   let idValue = "NULL";
   let valueWMO = 0;
@@ -152,7 +152,7 @@ function setIconWMO(valueNight, record, dayOfWeek) {
     if (i == 0) {
       valueWMO = record.current_weather.weathercode;
     } else {
-      valueWMO = findWMOAverage(runTimes, record);
+      valueWMO = findWMOAverage(runTimes, record, hour);
       runTimes++;
     }
     if (valueWMO == 0) {
@@ -262,7 +262,7 @@ function getDayString(dow) {
 }
 
 //finds the most commonly occouring WMO code (wip)
-function findWMOAverage(day, rcrd) {
+function findWMOAverage(day, rcrd, hour) {
   let curr = '{"weatherCurr":[' +
 '{"weatherType":45,"occurrences":0 },' +
 '{"weatherType":51,"occurrences":0 },' +
@@ -275,9 +275,13 @@ function findWMOAverage(day, rcrd) {
   let mf = 1;
   let mff, item, secondItem, valueWMO, startingIndex = 0;
   for (let i = 0; i < day; i++) {
-    startingIndex += 24;
+    if (day != 1) {
+      startingIndex += 24;
+    }
   }
+  startingIndex += hour;
   for (let i=0; i<24; i++) {
+    console.log(startingIndex);
     valueWMO = rcrd.hourly.weathercode[i+startingIndex];
     if ((valueWMO == 45) || (valueWMO == 48)) {
       obj.weatherCurr[0].occurrences++;
