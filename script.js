@@ -145,13 +145,15 @@ function setIconWMO(valueNight, record, dayOfWeek) {
   let textValue = "NULL";
   let idValue = "NULL";
   let valueWMO = 0;
+  let runTimes = 1;
   for (let i=0; i < 6; i++) {
     textValue = "NULL";
     idValue = "NULL";
     if (i == 0) {
       valueWMO = record.current_weather.weathercode;
     } else {
-      valueWMO = record.daily.weathercode[i]; //new find avg WMO
+      valueWMO = findWMOAverage(runTimes, record);
+      runTimes++;
     }
     if (valueWMO == 0) {
       if (valueNight && (i == 0)) {
@@ -260,10 +262,34 @@ function getDayString(dow) {
 }
 
 //finds the most commonly occouring WMO code (wip)
-function findWMOAverage(day) {
+function findWMOAverage(day, rcrd) {
   let startingIndex = 0;
   for (let i = 0; i < day; i++) {
     startingIndex += 24;
   }
-  
+  let mf = 1;
+  let m = 0;
+  let item = 0;
+  for (let i=0; i<24; i++) {
+    for (let j=i; j<24; j++) {
+      if (rcrd.hourly.weathercode[i+startingIndex] == rcrd.hourly.weathercode[j+startingIndex]) {
+        m++;
+        if (mf < m){
+          mf = m; 
+          item = rcrd.hourly.weathercode[i+startingIndex];
+        }
+      }
+    }
+    m=0;
+  }
+  /*   Create a system that will return the weathercode of a weather event if it occours for at least 6 hours
+  if ((item == 45) || (item == 48) || (item == 51) || (item == 53) || (item == 55) || (item == 56) || (item == 57) || 
+     (item == 61) || (item == 63) || (item == 65) || (item == 66) || (item == 67) || (item == 71) || (item == 73) || (item == 75) || 
+     (item == 77) || (item == 80) || (item == 81) || (item == 82) || (item == 85) || 
+      (item == 86) || (item == 95) || (item == 96) || (item == 99)) {
+    if (mf > 6) {
+      
+    }
+  }*/
+  return item;
 }
