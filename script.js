@@ -151,7 +151,7 @@ function setIconWMO(valueNight, record, dayOfWeek) {
     if (i == 0) {
       valueWMO = record.current_weather.weathercode;
     } else {
-      valueWMO = record.daily.weathercode[i];
+      valueWMO = record.daily.weathercode[i]; //new find avg WMO
     }
     if (valueWMO == 0) {
       if (valueNight && (i == 0)) {
@@ -257,4 +257,13 @@ function getDayString(dow) {
     dows = "Saturday";
   }
   return dows;
+}
+
+//finds the most commonly occouring WMO code (wip)
+function findWMOAverage(day) {
+  let startingIndex = 0;
+  for (let i = 0; i < day; i++) {
+    startingIndex += 24;
+  }
+  
 }
