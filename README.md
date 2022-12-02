@@ -15,8 +15,10 @@ This is a relatively new project, and I will try to update this as I continue wo
 - [ ] Weekly Forecast
 - [ ] Search for city
 - [ ] Mobile Viewing
+- [ ] Dark Mode
 - [ ] Other Pages
-- [ ] Chrome Extension
+- [ ] Chrome Extension?
+- [ ] App?
 ## Installation
 This code can be run instantly in whatever IDE you chose. You do not need to include the `.replit` and `replit.nix` files.
 The purpose of these files is to run the code on the Replit online IDE, easily view/share the site, and update this page.
