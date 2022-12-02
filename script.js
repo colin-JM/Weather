@@ -90,6 +90,7 @@ async function fetchData(latitude, longitude) {
   document.getElementById("dayThree").style.visibility = "visible";
   document.getElementById("dayFour").style.visibility = "visible";
   document.getElementById("dayFive").style.visibility = "visible";
+  document.getElementById("weatherData").style.visibility = "visible";
 }
 
 
