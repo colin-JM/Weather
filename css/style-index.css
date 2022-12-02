@@ -92,7 +92,7 @@
 .sky {
   color: #000;
   text-align: center;
-  margin: 1vh 1vw;
+  margin: 1.5vh 1vw;
   padding: 2vh 0vw;
   background-color: #fff;
   border-radius: 5px;
@@ -102,7 +102,7 @@
 .highLow {
   color: #000;
   text-align: center;
-  margin: 1vh 1vw;
+  margin: 1.5vh 1vw;
   padding: 2vh 0vw;
   background-color: #fff;
   border-radius: 5px;
@@ -155,12 +155,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 0px 1vh;
+  gap: 0px 1.5vh;
   grid-auto-flow: row;
   grid-template-areas:
     "boxOne boxTwo";
   height: 20%;
-  margin: 1vh 1vw;
+  margin: 1.5vh 1vw;
 }
 
 .boxOne { 
@@ -321,5 +321,5 @@
   margin: 1vh 1.5vw;
   color: #000;
   font-size: 1vw;
-  font-weight: 400;
+  font-weight: 600;
 }

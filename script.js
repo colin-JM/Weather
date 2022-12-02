@@ -69,9 +69,19 @@ async function fetchData(latitude, longitude) {
   } else {
      document.getElementById("feels-like").innerHTML = "Sunrise: " + record.daily.sunrise[0].slice(11,16) + " / Sunset: " + record.daily.sunset[0].slice(11,16);
   }
+
+  //sets high and low temps for the forecast
+  document.getElementById("highLowOne").innerHTML = record.daily.temperature_2m_max[1] + "°F / " + record.daily.temperature_2m_min[1] + "°F";
+  document.getElementById("highLowTwo").innerHTML = record.daily.temperature_2m_max[2] + "°F / " + record.daily.temperature_2m_min[2] + "°F";
+  document.getElementById("highLowThree").innerHTML = record.daily.temperature_2m_max[3] + "°F / " + record.daily.temperature_2m_min[3] + "°F";
+  document.getElementById("highLowFour").innerHTML = record.daily.temperature_2m_max[4] + "°F / " + record.daily.temperature_2m_min[4] + "°F";
+  document.getElementById("highLowFive").innerHTML = record.daily.temperature_2m_max[5] + "°F / " + record.daily.temperature_2m_min[5] + "°F";
   
   //hide & display HTML objects
-  document.getElementById("highLow").style.visibility = "visible";
+  let classElements = document.getElementsByClassName("highLow");
+  for (let i = 0; i < classElements.length; i++) {
+    classElements[i].style.visibility = "visible";
+  }
   document.getElementById("sky").style.visibility = "visible";
   document.getElementById("boxOne").style.visibility = "visible";
   document.getElementById("boxTwo").style.visibility = "visible";
@@ -281,7 +291,6 @@ function findWMOAverage(day, rcrd, hour) {
   }
   startingIndex += hour;
   for (let i=0; i<24; i++) {
-    console.log(startingIndex);
     valueWMO = rcrd.hourly.weathercode[i+startingIndex];
     if ((valueWMO == 45) || (valueWMO == 48)) {
       obj.weatherCurr[0].occurrences++;
