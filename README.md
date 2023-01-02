@@ -12,7 +12,8 @@ and the geolocation pins a city with *Big Data Cloud API*. From there, the progr
 ## Future of the project
 This is a relatively new project, and I will try to update this as I continue work on it:
 - [x] Fix `Undefined Errors` regarding the feels like temp and humdity (index error)
-- [ ] Weekly Forecast
+- [X] Weekly Forecast
+- [ ] Hourly Temp Graph
 - [ ] Search for city
 - [ ] Mobile Viewing
 - [ ] Dark Mode
