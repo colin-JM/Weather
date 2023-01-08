@@ -115,7 +115,7 @@ async function fetchData(latitude, longitude) {
       setTimeAMPM -= 12;
     }
    document.getElementById("p"+i.toString()).innerHTML = setTimeAMPM.toString() + ampm;
-   if (setTimeAMPM.toString() + ampm=="0am") {
+   if (setTimeAMPM.toString() + ampm=="0" + ampm) {
      document.getElementById("p"+i.toString()).innerHTML = "12" + ampm;
    }
    setTimeAMPM += 3;
