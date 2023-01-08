@@ -333,3 +333,7 @@
   margin: 0 auto;
   --color: #000;
 }
+
+tbody tr th {
+  font-weight: 500;
+}

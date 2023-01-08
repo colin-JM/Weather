@@ -94,6 +94,30 @@ async function fetchData(latitude, longitude) {
   document.getElementById("dayFour").style.visibility = "visible";
   document.getElementById("dayFive").style.visibility = "visible";
   document.getElementById("weatherData").style.visibility = "visible";
+
+  //sets hour values on chart
+  let setTimeAMPM = hour;
+  let setTime = hour;
+  let ampm = "am";
+  if (hour > 11) {
+    ampm = "pm";
+  }
+  for (let i = 1; i < 10; i++) {
+    if (setTime >= 24) {
+      setTime -= 24;
+    }
+    if (setTime > 11) {
+      ampm = "pm";
+    } else {
+      ampm = "am";
+    }
+    if (setTimeAMPM > 11) {
+      setTimeAMPM -= 12;
+    }
+   document.getElementById("p"+i.toString()).innerHTML = setTimeAMPM.toString() + ampm;
+   setTimeAMPM += 3;
+   setTime += 3;
+  }
 }
 
 
