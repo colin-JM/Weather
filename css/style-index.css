@@ -327,8 +327,9 @@
   font-weight: 600;
 }
 
+/* chart */
 #tempChart {
-  height: 90%;
+  height: 95%;
   width: 95%;
   margin: 0 auto;
   --color: #000;
@@ -336,4 +337,11 @@
 
 tbody tr th {
   font-weight: 500;
+}
+
+.data {
+  position: relative;
+  padding: 0.5vh;
+  font-size: 70%;
+  z-index: 10000;
 }

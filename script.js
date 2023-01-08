@@ -26,21 +26,27 @@ async function fetchData(latitude, longitude) {
   if ((hour < sunrise) || hour > sunset) {
     document.getElementById("today").style.backgroundColor = "#283048";
     document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #283048 0%, #859398 100%)";
+    document.getElementById("tempChart").style = "--color: linear-gradient(12deg, #283048 0%, #859398 100%)";
   } else if (hour == sunrise) {
     document.getElementById("today").style.backgroundColor = "#F3904F";
     document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #F3904F 0%, #3B4371 100%)";
+    document.getElementById("tempChart").style = "--color: linear-gradient(202deg, #F3904F 0%, #3B4371 100%)";
   } else if (hour == sunset) {
     document.getElementById("today").style.backgroundColor = "#0B486B";
     document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #0B486B 0%, #F56217 100%)";
+    document.getElementById("tempChart").style = "--color: linear-gradient(12deg, #0B486B 0%, #F56217 100%)";
   } else if ((weathercode >= 0) && (weathercode <= 2)) {
     document.getElementById("today").style.backgroundColor = "#24C6DC";
     document.getElementById("today").style.backgroundImage = "linear-gradient(168deg, #24C6DC 0%, #514A9D 100%)";
+    document.getElementById("tempChart").style = "--color: linear-gradient(168deg, #24C6DC 0%, #514A9D 100%)";
   } else if ((weathercode == 71) || (weathercode == 73) || (weathercode == 75) || (weathercode == 77)) {
     document.getElementById("today").style.backgroundColor = "#4CA1AF";
     document.getElementById("today").style.backgroundImage = "linear-gradient(12deg, #4CA1AF 0%, #C4E0E5 100%)";
+    document.getElementById("tempChart").style = "--color: linear-gradient(12deg, #4CA1AF 0%, #C4E0E5 100%)";
   } else {
     document.getElementById("today").style.backgroundColor = "#bbd2c5";
     document.getElementById("today").style.backgroundImage = "linear-gradient(202deg, #bbd2c5 0%, #536976 100%)";
+    document.getElementById("tempChart").style = "--color: linear-gradient(202deg, #bbd2c5 0%, #536976 100%)";
   }
   
   setIconWMO(night, record, dayOfWeek, hour);
@@ -136,11 +142,10 @@ async function fetchData(latitude, longitude) {
      minTemp = temps[i];
    }
   }
-  let spacing = 100/(Math.abs(maxTemp - minTemp));
   //edit style
   for (let i = 0; i < 9; i++) {
    document.getElementById("point" + (i+1).toString()).style = "--start: " + ((temps[i]-minTemp)/(maxTemp-minTemp)) +"; --size: " + ((temps[i+1]-minTemp)/(maxTemp-minTemp));
-   document.getElementById("pin" + (i+1).toString()).innerHTML = temps[i] + "°F";
+   document.getElementById("pin" + (i+1).toString()).innerHTML = temps[i+1] + "°F";
   }
 }
 
