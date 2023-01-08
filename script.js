@@ -77,8 +77,7 @@ async function fetchData(latitude, longitude) {
   document.getElementById("highLowFour").innerHTML = record.daily.temperature_2m_max[4] + "°F / " + record.daily.temperature_2m_min[4] + "°F";
   document.getElementById("highLowFive").innerHTML = record.daily.temperature_2m_max[5] + "°F / " + record.daily.temperature_2m_min[5] + "°F";
 
-  //polyline editing (wip)
-  document.getElementById("poly").points = "0,50";
+
 
   
   //hide & display HTML objects
