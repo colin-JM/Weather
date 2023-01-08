@@ -77,8 +77,6 @@ async function fetchData(latitude, longitude) {
   document.getElementById("highLowFour").innerHTML = record.daily.temperature_2m_max[4] + "°F / " + record.daily.temperature_2m_min[4] + "°F";
   document.getElementById("highLowFive").innerHTML = record.daily.temperature_2m_max[5] + "°F / " + record.daily.temperature_2m_min[5] + "°F";
 
-
-
   
   //hide & display HTML objects
   let classElements = document.getElementsByClassName("highLow");
@@ -95,14 +93,17 @@ async function fetchData(latitude, longitude) {
   document.getElementById("dayFive").style.visibility = "visible";
   document.getElementById("weatherData").style.visibility = "visible";
 
-  //sets hour values on chart
-  let setTimeAMPM = hour;
-  let setTime = hour;
+  //temp chart
+  let setTimeAMPM = hour; //12 hr time
+  let setTime = hour; //24hr time
+  let hourCode = hour //hours up to the full week
   let ampm = "am";
+  let temps = [];
   if (hour > 11) {
     ampm = "pm";
   }
   for (let i = 1; i < 10; i++) {
+    //sets hour values on chart
     if (setTime >= 24) {
       setTime -= 24;
     }
@@ -120,9 +121,28 @@ async function fetchData(latitude, longitude) {
    }
    setTimeAMPM += 3;
    setTime += 3;
+   //sets temps on the chart 
+   temps[i-1] = record.hourly.temperature_2m[hourCode];
+   hourCode += 3;
+  }
+  temps[9] = record.hourly.temperature_2m[hourCode];
+  //find min and max temp in the next 24 hours
+  let minTemp = temps[0];
+  let maxTemp = temps[0];
+  for (let i = 1; i < 9; i++) {
+   if (temps[i] > maxTemp) {
+      maxTemp = temps[i];
+   } else if (temps[i] < minTemp) {
+     minTemp = temps[i];
+   }
+  }
+  let spacing = 100/(Math.abs(maxTemp - minTemp));
+  //edit style
+  for (let i = 0; i < 9; i++) {
+   document.getElementById("point" + (i+1).toString()).style = "--start: " + ((temps[i]-minTemp)/(maxTemp-minTemp)) +"; --size: " + ((temps[i+1]-minTemp)/(maxTemp-minTemp));
+   document.getElementById("pin" + (i+1).toString()).innerHTML = temps[i] + "°F";
   }
 }
-
 
 //long and lat to city - display
 async function getCity(latitude, longitude) {
