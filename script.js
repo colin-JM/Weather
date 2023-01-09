@@ -115,7 +115,7 @@ async function fetchData(latitude, longitude) {
   if (hour > 11) {
     ampm = "pm";
   }
-  for (let i = 1; i < 10; i++) {
+  for (let i = 1; i < 25; i += 3) {
     //sets hour values on chart
     if (setTime >= 24) {
       setTime -= 24;
@@ -135,14 +135,15 @@ async function fetchData(latitude, longitude) {
    setTimeAMPM += 3;
    setTime += 3;
    //sets temps on the chart 
-   temps[i-1] = record.hourly.temperature_2m[hourCode];
    hourCode += 3;
   }
-  temps[9] = record.hourly.temperature_2m[hourCode];
+  for (let i = 0; i < 25; i++) {
+    temps[i] = record.hourly.temperature_2m[hour+i];
+  }
   //find min and max temp in the next 24 hours
   let minTemp = temps[0];
   let maxTemp = temps[0];
-  for (let i = 1; i < 9; i++) {
+  for (let i = 1; i < 25; i++) {
    if (temps[i] > maxTemp) {
       maxTemp = temps[i];
    } else if (temps[i] < minTemp) {
@@ -150,11 +151,19 @@ async function fetchData(latitude, longitude) {
    }
   }
   //edit style
-  for (let i = 0; i < 9; i++) {
-   document.getElementById("point" + (i+1).toString()).style = "--start: " + ((temps[i]-minTemp)/(maxTemp-minTemp)) +"; --size: " + ((temps[i+1]-minTemp)/(maxTemp-minTemp));
-   document.getElementById("pin" + (i+1).toString()).innerHTML = temps[i+1] + "°F";
+  let count = 0;
+  let pinCount = 1;
+  for (let i = 0; i < 24; i++) {
+    count++;
+   document.getElementById("point" + (i+1).toString()).style = "--start: " + ((((.8 * (temps[i]-minTemp))/(maxTemp-minTemp))+0.1)) +"; --size: " + ((((.8 * (temps[i+1]-minTemp))/(maxTemp-minTemp))+0.1));
+   if (count == 3) {
+     document.getElementById("pin" + pinCount.toString()).innerHTML = temps[i+1] + "°F";
+     count = 0;
+     pinCount++;
+   }
   }
 
+  
   //change graph per day
   //day 1
   document.getElementById("dayOne").addEventListener("mouseenter", (event) => {

@@ -340,11 +340,16 @@
 
 tbody tr th {
   font-weight: 500;
+  font-size: 90%;
+}
+
+.row {
+  font-size: 75%;
 }
 
 .data {
   position: relative;
   padding: 0.5vh;
-  font-size: 70%;
+  font-size: 65%;
 }
 
