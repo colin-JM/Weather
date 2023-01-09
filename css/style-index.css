@@ -99,12 +99,15 @@
   visibility: hidden;
 }
 
+#highLow {
+  background-color: #fff;
+}
+
 .highLow {
   color: #000;
   text-align: center;
   margin: 1.5vh 1vw;
   padding: 2vh 0vw;
-  background-color: #fff;
   border-radius: 5px;
   visibility: hidden;
 }
@@ -343,5 +346,5 @@ tbody tr th {
   position: relative;
   padding: 0.5vh;
   font-size: 70%;
-  z-index: 10000;
 }
+
