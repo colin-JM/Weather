@@ -105,6 +105,7 @@ async function fetchData(latitude, longitude) {
   document.getElementById("dayFour").style.visibility = "visible";
   document.getElementById("dayFive").style.visibility = "visible";
   document.getElementById("weatherData").style.visibility = "visible";
+  document.getElementById("searchBarA").style.visibility = "visible";
 
   //temp chart
   let setTimeAMPM = hour; //12 hr time
@@ -449,4 +450,14 @@ function findWMOAverage(day, rcrd, hour) {
     item = secondItem;
   }
   return item;
+}
+
+//search function
+function progressSearch() {
+  document.getElementById("listOfOptions").style.visibility = "visible";
+  document.getElementById("listOfOptions").style.opacity = "100%";
+  if (document.getElementById('searchBarA').value == "") {
+    document.getElementById("listOfOptions").style.opacity = "0%";
+    document.getElementById("listOfOptions").style.visibility = "hidden";
+  }
 }

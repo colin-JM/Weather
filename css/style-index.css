@@ -353,3 +353,29 @@ tbody tr th {
   font-size: 65%;
 }
 
+/* search */
+#searchBarA {
+  padding: 10px;
+  visibility: hidden;
+  margin-top: 4vh;
+  margin-left: 1.5vw;
+  width: 30vw;
+  height: 35%;
+  border-radius: 25px;
+  border: 3px solid #000;
+}
+
+#listOfOptions {
+  margin-left: 1.5vw;
+  position: absolute;
+  visibility: hidden;
+  z-index: 100;
+  width: 30vw;
+  height: 300px;
+  border: 3px solid #000;
+  border-radius: 25px;
+  background-color: #fff;
+  margin-top: 1vh;
+  transition: all 0.5s;
+  opacity: 0%;
+}
