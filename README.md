@@ -1,9 +1,8 @@
 # Weather
 Weather is a project to work on my use of markup and styling (HTML & CSS) along with a refresher of Javascript with APIs.
 Eventually I would like to use jQuery for this project, but that is for a different day. I am currently working on the
-website to be viewed from a large screen, and eventually will work around to making it optomized for mobile-liked devices.
-Future projects to expand on would be a Chrome Extensions and/or App. This project is not generating revenue and is just
-being used to build my skills. I hope you enjoy!
+website to be viewed from a large screen (laptop/pc/monitor), and eventually will work around to making it optomized for mobile devices.
+Future projects to expand on would be a Chrome Extensions and/or App. This project is not generating revenue (side-project). I hope you enjoy!
 ### Live Build Website
 You can view the live website on my repl page here: (weather.colinjm.repl.co)[https://weather.colinjm.repl.co/]
 
