@@ -4,6 +4,10 @@ Eventually I would like to use jQuery for this project, but that is for a differ
 website to be viewed from a large screen, and eventually will work around to making it optomized for mobile-liked devices.
 Future projects to expand on would be a Chrome Extensions and/or App. This project is not generating revenue and is just
 being used to build my skills. I hope you enjoy!
+###Live Build Website
+You can view the live website on my repl page here:
+> (weather.colinjm.repl.co)[https://weather.colinjm.repl.co/]
+`The website may not be live if it hasn't been opened recently by me. In addition, mobile viewing is not supported as of 1/10/2023.`
 ## What's going on here?
 This project is currently using two APIs, [Open-Meteo](https://open-meteo.com/) for weather 
 data and [Big Data Cloud](https://www.bigdatacloud.com/) for reverse geocoding. I am extremely thankful for these services as
