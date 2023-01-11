@@ -15,7 +15,7 @@ html {
 }
  a, a:hover, a:focus, a:active {
      text-decoration: none;
-     color: inherit;
+     color: #2980b9;
  }
 li {
  list-style: none;
@@ -112,4 +112,14 @@ h4 {
 
 h5 {
   font-weight: 400;
+}
+
+/* footer */
+
+footer {
+  height: 30vh;
+  text-align: center;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  line-height: 150%;
 }

@@ -49,6 +49,7 @@
   border-radius: 25px;
 }
 
+
 /* today */
 
 .info {
@@ -184,6 +185,12 @@
 /* scaling */
 
 @media only screen and (max-width: 850px) {
+  .hero {
+    height: 100vh;
+  }
+  .locPrompt {
+    height: 100vh;
+  }
   .inner-grid {
   display: grid; 
   grid-template-columns: 1fr; 
@@ -194,7 +201,10 @@
     "forecast"
     "forecast"; 
   }
-  .forecast { grid-area: forecast; }
+  .forecast {
+    grid-area: forecast;
+    visibility: collapse;
+  }
   .today { 
     grid-area: today; 
     height: 90vh;
@@ -203,7 +213,6 @@
   grid-area: content-box;
   border-radius: 25px;
   margin: 3vh 5vw;
-  height: 100%;
   }
   
   #icon {
@@ -233,6 +242,12 @@
 }
 
 @media only screen and (max-width: 380px) {
+  .hero {
+    height: 100vh;
+  }
+  .locPrompt {
+    height: 100vh;
+  }
   .inner-grid {
   display: grid; 
   grid-template-columns: 1fr; 
@@ -243,7 +258,10 @@
     "forecast";
   height: 200vh;
   }
-  .forecast { grid-area: forecast; }
+  .forecast {
+    grid-area: forecast;
+    visibility: collapse;
+  }
   .today { 
     grid-area: today; 
     height: 100%;
@@ -252,7 +270,6 @@
     grid-area: content-box;
     border-radius: 25px;
     margin: 3vh 5vw;
-    height: 100%;
   }
   
   #icon {
