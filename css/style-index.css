@@ -33,6 +33,11 @@
 .locPrompt h2 {
   color: #fff;
   font-size: 3vw;
+  margin-bottom: 4vh;
+}
+.locPrompt span {
+  font-size: 0.7em;
+  font-weight: 400;
 }
 
 .today { 
@@ -49,6 +54,26 @@
   border-radius: 25px;
 }
 
+.find {
+  font-size: 2.5vh;
+  color: #fff;
+  margin-top: 4vh;
+  padding: 1vh;
+}
+
+.find a {
+  color: #AED6F1;
+}
+
+.find a:hover {
+  text-decoration: underline;
+}
+
+.git-1 {
+  height: 1.5em;
+  margin-right: 1vh;
+  vertical-align: middle;
+}
 
 /* today */
 

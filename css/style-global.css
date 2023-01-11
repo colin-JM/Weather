@@ -29,7 +29,7 @@ li {
 }
 
 *::-webkit-scrollbar-thumb {
-   background-image: linear-gradient(180deg, #CBE8F7 0%, #CBE8F7 99%);
+   background-image: linear-gradient(180deg, #2980b9 0%, #2c3e50 99%);
    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
    border-radius: 100px;
   border: 3px solid #ffffff;
@@ -116,10 +116,105 @@ h5 {
 
 /* footer */
 
-footer {
-  height: 30vh;
+.newFooter {  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "footerSquare1 footerSquare2 footerSquare3 footerSquare4"
+    "footerSquare1 footerSquare2 footerSquare3 footerSquare4"
+    "footerSquare1 footerSquare2 footerSquare3 footerSquare4"
+    "footerSquare1 footerSquare2 footerSquare3 footerSquare4"
+    "bottomFooter bottomFooter bottomFooter bottomFooter";
+  background-color: #1F618D;
+  height: 40vh;
+  padding: 10vh 15vw 5vh;
+}
+
+.bottomFooter { 
+  grid-area: bottomFooter; 
+}
+
+.footerSquare1 {
+  grid-area: footerSquare1; 
+}
+
+.footerSquare2 { 
+  grid-area: footerSquare2;
+}
+
+.footerSquare3 { 
+  grid-area: footerSquare3; 
+}
+
+.footerSquare4 {
+  grid-area: footerSquare4;
+}
+
+.newFooter a {
+  color: #fff;
+  font-weight: 300;
+}
+.newFooter a:hover {
+  text-decoration: underline;
+  cursor: default;
+}
+.newFooter li {
+  color: #fff;
+  font-weight: 600;
+}
+.newFooter h6 {
+  color: #fff;
+  font-weight: 500;
   text-align: center;
-  padding-top: 5vh;
-  padding-bottom: 5vh;
-  line-height: 150%;
+}
+.newFooter h2 {
+  color: #fff;
+}
+.newFooter span {
+  font-size: 2vh;
+  font-weight: 400;
+}
+
+.findA {
+  font-size: 1.5vh;
+  color: #fff;
+  margin-top: 0.5vh;
+}
+
+.findA a {
+  color: #fff;
+}
+
+.findA a:hover {
+  text-decoration: underline;
+}
+
+.git-2 {
+  height: 1.5em;
+  margin-right: 1vh;
+  vertical-align: middle;
+}
+
+
+@media only screen and (max-width: 850px) {
+  .newFooter {
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "footerSquare1"
+    "footerSquare2"
+    "footerSquare3"
+    "footerSquare4"
+    "bottomFooter"; 
+  }
+  .footerSquare1 { grid-area: footerSquare1; }
+  .bottomFooter { grid-area: bottomFooter; }
+  .footerSquare2 { grid-area: footerSquare2; }
+  .footerSquare3 { grid-area: footerSquare3; }
+  .footerSquare4 { grid-area: footerSquare4; }
 }
