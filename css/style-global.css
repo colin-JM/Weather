@@ -35,6 +35,7 @@ li {
   border: 3px solid #ffffff;
 }
 .material-symbols-outlined {
+  cursor: default;
   font-variation-settings:
   'FILL' 0,
   'wght' 400,

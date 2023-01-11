@@ -328,6 +328,11 @@
   color: #000;
   font-size: 1vw;
   font-weight: 600;
+  cursor: default;
+}
+
+.weekBoxes .material-symbols-outlined, .weekBoxes .highLow{
+  cursor: default;
 }
 
 /* chart */
