@@ -63,6 +63,15 @@ async function fetchData(latitude, longitude) {
     document.getElementById("icon").innerHTML+=" severe_cold";
   }
 
+  //precip
+  if ((record.daily.snowfall_sum[0] > record.daily.rain_sum[0]) && (record.daily.snowfall_sum[0]*0.393701 >= 0.01)) {
+    document.getElementById("precipReading").innerHTML = (record.daily.snowfall_sum[0]*0.393701).toString().slice(0,4) + " inches of snowfall expected today";
+    document.getElementById("precipIcon").innerHTML = "weather_snowy";
+  } else if (record.daily.rain_sum[0]*0.393701 >= 0.01) {
+    document.getElementById("precipReading").innerHTML = (record.daily.rain_sum[0]*0.393701).toString().slice(0,4) + " inches of rain expected today";
+    document.getElementById("precipIcon").innerHTML = "rainy";
+  }
+
   //displays max and min temps for current day
   document.getElementById("highLow").innerHTML = record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
 
@@ -166,6 +175,7 @@ async function fetchData(latitude, longitude) {
 
   
   //change graph per day
+  
   //day 1
   document.getElementById("dayOne").addEventListener("mouseenter", (event) => {
     changeGraph("#ECF0F1", event);

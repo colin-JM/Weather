@@ -323,6 +323,7 @@
   }
 }
 
+
 /* forecast */
 
 .weekBoxes {  
@@ -331,7 +332,7 @@
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
   gap: 0px 1vw; 
   grid-template-areas: 
-    "searchBar searchBar searchBar searchBar logo"
+    "searchBar searchBar searchBar precip precip"
     "weatherData weatherData weatherData weatherData weatherData"
     "weatherData weatherData weatherData weatherData weatherData"
     "dayOne dayTwo dayThree dayFour dayFive"
@@ -358,7 +359,7 @@
 }
 
 .searchBar { grid-area: searchBar; }
-.logo { grid-area: logo; }
+.precip { grid-area: precip; }
 .weatherData {
   grid-area: weatherData;
   visibility: hidden;
@@ -375,6 +376,22 @@
 
 .weekBoxes .material-symbols-outlined, .weekBoxes .highLow{
   cursor: default;
+}
+
+/* precip */
+
+.precipContainer {
+  font-size: 1vw;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+#precipIcon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin-right: 1vh;
+  font-size: 2em;
 }
 
 /* chart */
@@ -403,8 +420,7 @@ tbody tr th {
 /* search */
 #searchBarA {
   padding: 10px;
-  visibility: hidden;
-  margin-top: 4vh;
+  visibility: hidden; 
   margin-left: 1.5vw;
   width: 30vw;
   height: 35%;
@@ -412,9 +428,16 @@ tbody tr th {
   border: 3px solid #000;
 }
 
+.search {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
 #listOfOptions {
   margin-left: 1.5vw;
   position: absolute;
+  top: 23vh;
   visibility: hidden;
   z-index: 100;
   width: 30vw;
