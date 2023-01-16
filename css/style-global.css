@@ -204,7 +204,7 @@ h5 {
   display: grid; 
   grid-template-columns: 1fr; 
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
-  gap: 0px 0px; 
+  gap: 2vh 0px; 
   grid-template-areas: 
     "footerSquare1"
     "footerSquare2"
@@ -213,8 +213,21 @@ h5 {
     "bottomFooter"; 
   }
   .footerSquare1 { grid-area: footerSquare1; }
-  .bottomFooter { grid-area: bottomFooter; }
+  .bottomFooter { 
+    grid-area: bottomFooter;
+    height: 100%;
+  }
   .footerSquare2 { grid-area: footerSquare2; }
   .footerSquare3 { grid-area: footerSquare3; }
   .footerSquare4 { grid-area: footerSquare4; }
+
+  footer {
+    background-color: #1F618D;
+    height: 70vh;
+    position: relative;
+    top: 0px;
+  }
+  .bottomFooter h6{
+    font-size: 3vw;
+  }
 }

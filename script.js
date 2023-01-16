@@ -64,16 +64,10 @@ async function fetchData(latitude, longitude) {
   }
 
   //precip
-  if ((record.daily.snowfall_sum[0] > record.daily.rain_sum[0]) && (record.daily.snowfall_sum[0]*0.393701 >= 0.01)) {
-    document.getElementById("precipReading").innerHTML = (record.daily.snowfall_sum[0]*0.393701).toString().slice(0,4) + " inches of snowfall expected today";
-    document.getElementById("precipIcon").innerHTML = "weather_snowy";
-  } else if (record.daily.rain_sum[0]*0.393701 >= 0.01) {
-    document.getElementById("precipReading").innerHTML = (record.daily.rain_sum[0]*0.393701).toString().slice(0,4) + " inches of rain expected today";
-    document.getElementById("precipIcon").innerHTML = "rainy";
-  }
+  calculatePrecipVaL(record, 0, dayOfWeek);
 
   //displays max and min temps for current day
-  document.getElementById("highLow").innerHTML = record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
+  document.getElementById("highLow").innerHTML = "Sunrise: " + record.daily.sunrise[0].slice(11,16) + " / Sunset: " + record.daily.sunset[0].slice(11,16);
 
   //displays windspeed for current day
   let wind = Math.round(record.current_weather.windspeed);
@@ -88,16 +82,14 @@ async function fetchData(latitude, longitude) {
   const maxWindGusts = record.daily.windgusts_10m_max[0];
   if (feelsLike < 32) {
     document.getElementById("feels-like").innerHTML = "Feels Like: " + feelsLike + "°F / Gusts: " + Math.round(maxWindGusts) + "mph";
-  } else {
-     document.getElementById("feels-like").innerHTML = "Sunrise: " + record.daily.sunrise[0].slice(11,16) + " / Sunset: " + record.daily.sunset[0].slice(11,16);
   }
 
   //sets high and low temps for the forecast
-  document.getElementById("highLowOne").innerHTML = record.daily.temperature_2m_max[1] + "°F / " + record.daily.temperature_2m_min[1] + "°F";
-  document.getElementById("highLowTwo").innerHTML = record.daily.temperature_2m_max[2] + "°F / " + record.daily.temperature_2m_min[2] + "°F";
-  document.getElementById("highLowThree").innerHTML = record.daily.temperature_2m_max[3] + "°F / " + record.daily.temperature_2m_min[3] + "°F";
-  document.getElementById("highLowFour").innerHTML = record.daily.temperature_2m_max[4] + "°F / " + record.daily.temperature_2m_min[4] + "°F";
-  document.getElementById("highLowFive").innerHTML = record.daily.temperature_2m_max[5] + "°F / " + record.daily.temperature_2m_min[5] + "°F";
+  document.getElementById("highLowOne").innerHTML = record.daily.temperature_2m_max[0] + "°F / " + record.daily.temperature_2m_min[0] + "°F";
+  document.getElementById("highLowTwo").innerHTML = record.daily.temperature_2m_max[1] + "°F / " + record.daily.temperature_2m_min[1] + "°F";
+  document.getElementById("highLowThree").innerHTML = record.daily.temperature_2m_max[2] + "°F / " + record.daily.temperature_2m_min[2] + "°F";
+  document.getElementById("highLowFour").innerHTML = record.daily.temperature_2m_max[3] + "°F / " + record.daily.temperature_2m_min[3] + "°F";
+  document.getElementById("highLowFive").innerHTML = record.daily.temperature_2m_max[4] + "°F / " + record.daily.temperature_2m_min[4] + "°F";
 
   
   //hide & display HTML objects
@@ -117,105 +109,49 @@ async function fetchData(latitude, longitude) {
   document.getElementById("searchBarA").style.visibility = "visible";
 
   //temp chart
-  let setTimeAMPM = hour; //12 hr time
-  let setTime = hour; //24hr time
-  let hourCode = hour //hours up to the full week
-  let ampm = "am";
-  let temps = [];
-  if (hour > 11) {
-    ampm = "pm";
-  }
-  for (let i = 1; i < 25; i += 3) {
-    //sets hour values on chart
-    if (setTime >= 24) {
-      setTime -= 24;
-    }
-    if (setTime > 11) {
-      ampm = "pm";
-    } else {
-      ampm = "am";
-    }
-    if (setTimeAMPM > 11) {
-      setTimeAMPM -= 12;
-    }
-   document.getElementById("p"+i.toString()).innerHTML = setTimeAMPM.toString() + ampm;
-   if (setTimeAMPM.toString() + ampm=="0" + ampm) {
-     document.getElementById("p"+i.toString()).innerHTML = "12" + ampm;
-   }
-   setTimeAMPM += 3;
-   setTime += 3;
-   //sets temps on the chart 
-   hourCode += 3;
-  }
-  for (let i = 0; i < 25; i++) {
-    temps[i] = record.hourly.temperature_2m[hour+i];
-  }
-  //find min and max temp in the next 24 hours
-  let minTemp = temps[0];
-  let maxTemp = temps[0];
-  for (let i = 1; i < 25; i++) {
-   if (temps[i] > maxTemp) {
-      maxTemp = temps[i];
-   } else if (temps[i] < minTemp) {
-     minTemp = temps[i];
-   }
-  }
-  //edit style
-  let count = 0;
-  let pinCount = 1;
-  for (let i = 0; i < 24; i++) {
-    count++;
-   document.getElementById("point" + (i+1).toString()).style = "--start: " + ((((.8 * (temps[i]-minTemp))/(maxTemp-minTemp))+0.1)) +"; --size: " + ((((.8 * (temps[i+1]-minTemp))/(maxTemp-minTemp))+0.1));
-   if (count == 3) {
-     document.getElementById("pin" + pinCount.toString()).innerHTML = temps[i+1] + "°F";
-     count = 0;
-     pinCount++;
-   }
-  }
+  modifyTempChart(record, hour);
 
   
   //change graph per day
-  
-  //day 1
-  document.getElementById("dayOne").addEventListener("mouseenter", (event) => {
+  document.getElementById("dayOne").style.backgroundColor = "#ECF0F1";
+   //day 1
+  document.getElementById("dayOne").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-  }, false);
-  document.getElementById("dayOne").addEventListener("mouseleave", (event) => {
-    changeGraph("#fff", event);
+    modifyTempChart(record, hour);
+    calculatePrecipVaL(record,0,dayOfWeek);
   }, false);
   //day 2
-  document.getElementById("dayTwo").addEventListener("mouseenter", (event) => {
+  document.getElementById("dayTwo").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-  }, false);
-  document.getElementById("dayTwo").addEventListener("mouseleave", (event) => {
-    changeGraph("#fff", event);
+    modifyTempChart(record, 48);
+    calculatePrecipVaL(record,1,dayOfWeek);
   }, false);
   //day 3
-  document.getElementById("dayThree").addEventListener("mouseenter", (event) => {
+  document.getElementById("dayThree").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-  }, false);
-  document.getElementById("dayThree").addEventListener("mouseleave", (event) => {
-    changeGraph("#fff", event);
+    modifyTempChart(record, 72);
+    calculatePrecipVaL(record,2,dayOfWeek);
   }, false);
   //day 4
-  document.getElementById("dayFour").addEventListener("mouseenter", (event) => {
+  document.getElementById("dayFour").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-  }, false);
-  document.getElementById("dayFour").addEventListener("mouseleave", (event) => {
-    changeGraph("#fff", event);
+    modifyTempChart(record, 96);
+    calculatePrecipVaL(record,3,dayOfWeek);
   }, false);
   //day 5
-  document.getElementById("dayFive").addEventListener("mouseenter", (event) => {
+  document.getElementById("dayFive").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
+    modifyTempChart(record, 120);
+    calculatePrecipVaL(record,4,dayOfWeek);
   }, false);
-  document.getElementById("dayFive").addEventListener("mouseleave", (event) => {
-    changeGraph("#fff", event);
-  }, false);
-
-  
 }
 //function to avoid repeated code for changing graph per day
 function changeGraph(color, passEvent) {
+  document.getElementById("dayOne").style.backgroundColor = "#fff";
+  document.getElementById("dayTwo").style.backgroundColor = "#fff";
+  document.getElementById("dayThree").style.backgroundColor = "#fff";
+  document.getElementById("dayFour").style.backgroundColor = "#fff";
+  document.getElementById("dayFive").style.backgroundColor = "#fff";
   passEvent.target.style.backgroundColor = color;
   passEvent.target.style.transition = "all 0.5s";
 }
@@ -283,7 +219,7 @@ function setIconWMO(valueNight, record, dayOfWeek, hour) {
   let idValue = "NULL";
   let valueWMO = 0;
   let runTimes = 1;
-  for (let i=0; i < 6; i++) {
+  for (let i=0; i < 5; i++) {
     textValue = "NULL";
     idValue = "NULL";
     if (i == 0) {
@@ -355,16 +291,15 @@ function setIconWMO(valueNight, record, dayOfWeek, hour) {
     if (i == 0) {
       document.getElementById("sky").innerHTML = textValue;
       document.getElementById("icon").innerHTML = idValue;
-    } else if (i == 1) {
       document.getElementById("dayOneIcon").innerHTML = idValue;
       document.getElementById("dayOneDate").innerHTML = getDayString(dayOfWeek);
-    } else if (i == 2) {
+    } else if (i == 1) {
       document.getElementById("dayTwoIcon").innerHTML = idValue;
       document.getElementById("dayTwoDate").innerHTML = getDayString(dayOfWeek);
-    } else if (i == 3) {
+    } else if (i == 2) {
       document.getElementById("dayThreeIcon").innerHTML = idValue;
       document.getElementById("dayThreeDate").innerHTML = getDayString(dayOfWeek);
-    } else if (i == 4) {
+    } else if (i == 3) {
       document.getElementById("dayFourIcon").innerHTML = idValue;
       document.getElementById("dayFourDate").innerHTML = getDayString(dayOfWeek);
     } else {
@@ -462,6 +397,72 @@ function findWMOAverage(day, rcrd, hour) {
   return item;
 }
 
+//temp chart modifier
+function modifyTempChart(record, hour) {
+  let setTimeAMPM = hour; //12 hr time
+  let setTime = hour; //24hr time
+  let hourCode = hour //hours up to the full week
+  let ampm = "am";
+  let temps = [];
+  if (hour > 11) {
+    ampm = "pm";
+  }
+  for (let i = 1; i < 25; i += 3) {
+    //sets hour values on chart
+    if (setTime >= 24) {
+      setTime -= 24;
+    }
+    if (setTime > 11) {
+      ampm = "pm";
+    } else {
+      ampm = "am";
+    }
+    if (setTimeAMPM > 11) {
+      setTimeAMPM -= 12;
+    }
+   document.getElementById("p"+i.toString()).innerHTML = setTimeAMPM.toString() + ampm;
+   if (setTimeAMPM.toString() + ampm=="0" + ampm) {
+     document.getElementById("p"+i.toString()).innerHTML = "12" + ampm;
+   }
+   if (hour >= 24) {
+     if (i > 12) {
+       document.getElementById("p"+i.toString()).innerHTML = (i-12).toString() + "pm";
+     } else {
+       document.getElementById("p"+i.toString()).innerHTML = i.toString() + "am";
+     }
+   }
+   setTimeAMPM += 3;
+   setTime += 3;
+   //sets temps on the chart 
+   hourCode += 3;
+  }
+  for (let i = 0; i < 25; i++) {
+    temps[i] = record.hourly.temperature_2m[hour+i];
+  }
+  //find min and max temp in the next 24 hours
+  let minTemp = temps[0];
+  let maxTemp = temps[0];
+  for (let i = 1; i < 25; i++) {
+   if (temps[i] > maxTemp) {
+      maxTemp = temps[i];
+   } else if (temps[i] < minTemp) {
+     minTemp = temps[i];
+   }
+  }
+  //edit style
+  let count = 0;
+  let pinCount = 1;
+  for (let i = 0; i < 24; i++) {
+    count++;
+   document.getElementById("point" + (i+1).toString()).style = "--start: " + ((((.8 * (temps[i]-minTemp))/(maxTemp-minTemp))+0.1)) +"; --size: " + ((((.8 * (temps[i+1]-minTemp))/(maxTemp-minTemp))+0.1));
+   if (count == 3) {
+     document.getElementById("pin" + pinCount.toString()).innerHTML = temps[i+1] + "°F";
+     count = 0;
+     pinCount++;
+   }
+  }
+}
+
 //search function
 function progressSearch() {
   document.getElementById("listOfOptions").style.visibility = "visible";
@@ -469,5 +470,33 @@ function progressSearch() {
   if (document.getElementById('searchBarA').value == "") {
     document.getElementById("listOfOptions").style.opacity = "0%";
     document.getElementById("listOfOptions").style.visibility = "hidden";
+  }
+}
+
+//precip
+function calculatePrecipVaL(record, index, dayOfWeek) {
+  let day = dayOfWeek + index;
+  if (day > 6) {
+    day -= 7;
+  }
+  if ((record.daily.snowfall_sum[index] > record.daily.rain_sum[index]) && (record.daily.snowfall_sum[index]*0.393701 >= 0.01)) {
+    document.getElementById("precipReading").innerHTML = (record.daily.snowfall_sum[index]*0.393701).toString().slice(0,4) + " inches of snowfall expected ";
+    if (index != 0) {
+      document.getElementById("precipReading").innerHTML += getDayString(day);
+    } else {
+      document.getElementById("precipReading").innerHTML += "today";
+    }
+    document.getElementById("precipIcon").innerHTML = "weather_snowy";
+  } else if (record.daily.rain_sum[index]*0.393701 >= 0.01) {
+    document.getElementById("precipReading").innerHTML = (record.daily.rain_sum[index]*0.393701).toString().slice(0,4) + " inches of rain expected ";
+    if (index != 0) {
+      document.getElementById("precipReading").innerHTML += getDayString(day);
+    } else {
+      document.getElementById("precipReading").innerHTML += "today";
+    }
+    document.getElementById("precipIcon").innerHTML = "rainy";
+  } else {
+    document.getElementById("precipReading").innerHTML = "";
+    document.getElementById("precipIcon").innerHTML = "";
   }
 }

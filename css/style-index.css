@@ -52,6 +52,7 @@
   grid-area: forecast; 
   background-color: transparent;
   border-radius: 25px;
+  cursor: default;
 }
 
 .find {
@@ -211,7 +212,10 @@
 
 @media only screen and (max-width: 850px) {
   .hero {
-    height: 100vh;
+    height: 200vh;
+  }
+  .content-box {
+    height: 200vh;
   }
   .locPrompt {
     height: 100vh;
@@ -264,6 +268,7 @@
   .feels-like {
     font-size: 4vw;
   }
+  
 }
 
 @media only screen and (max-width: 380px) {
@@ -330,7 +335,7 @@
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
-  gap: 0px 1vw; 
+  gap: 0px 0vw; 
   grid-template-areas: 
     "searchBar searchBar searchBar precip precip"
     "weatherData weatherData weatherData weatherData weatherData"
@@ -356,6 +361,9 @@
   height: 85%;
   border-radius: 15px;
   visibility: hidden;
+  margin: 0 0.5vw;
+  z-index: 25;
+  cursor: pointer;
 }
 
 .searchBar { grid-area: searchBar; }
@@ -374,9 +382,11 @@
   cursor: default;
 }
 
-.weekBoxes .material-symbols-outlined, .weekBoxes .highLow{
-  cursor: default;
+.weekBoxes .material-symbols-outlined, .weekBoxes .highLow, .weekBoxes .dayOfWeek {
+  cursor: pointer;
+  pointer-events: none;
 }
+
 
 /* precip */
 
@@ -400,6 +410,7 @@
   width: 95%;
   margin: 0 auto;
   --color: #000;
+  transition: all 0.5s;
 }
 
 tbody tr th {
@@ -415,6 +426,10 @@ tbody tr th {
   position: relative;
   padding: 0.5vh;
   font-size: 65%;
+}
+
+.charts-p {
+  transition: all 0.5s;
 }
 
 /* search */
