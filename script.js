@@ -461,6 +461,12 @@ function modifyTempChart(record, hour) {
      pinCount++;
    }
   }
+  let divs = document.querySelectorAll('.charts-p');
+  for (var i = 0; i < divs.length; i++) {
+    divs[i].classList.remove("animateChart");
+    divs[i].offsetWidth;
+    divs[i].classList.add("animateChart");
+  }
 }
 
 //search function
