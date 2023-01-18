@@ -396,6 +396,21 @@
   align-items: center;
   height: 100%;
 }
+.precipAnimate {
+  opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
+}
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
 #precipIcon {
   display: flex;
   align-items: center;

@@ -462,6 +462,9 @@ function modifyTempChart(record, hour) {
    }
   }
   let divs = document.querySelectorAll('.charts-p');
+  document.getElementById("precipSpan").classList.remove("precipAnimate");
+  document.getElementById("precipSpan").offsetWidth;
+  document.getElementById("precipSpan").classList.add("precipAnimate");
   for (var i = 0; i < divs.length; i++) {
     divs[i].classList.remove("animateChart");
     divs[i].offsetWidth;
