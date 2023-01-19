@@ -472,16 +472,6 @@ function modifyTempChart(record, hour) {
   }
 }
 
-//search function
-function progressSearch() {
-  document.getElementById("listOfOptions").style.visibility = "visible";
-  document.getElementById("listOfOptions").style.opacity = "100%";
-  if (document.getElementById('searchBarA').value == "") {
-    document.getElementById("listOfOptions").style.opacity = "0%";
-    document.getElementById("listOfOptions").style.visibility = "hidden";
-  }
-}
-
 //precip
 function calculatePrecipVaL(record, index, dayOfWeek) {
   let day = dayOfWeek + index;
@@ -508,4 +498,18 @@ function calculatePrecipVaL(record, index, dayOfWeek) {
     document.getElementById("precipReading").innerHTML = "";
     document.getElementById("precipIcon").innerHTML = "";
   }
+}
+
+//search function
+function progressSearch() {
+  //visibility
+  document.getElementById("listOfOptions").style.visibility = "visible";
+  document.getElementById("listOfOptions").style.opacity = "100%";
+  if (document.getElementById('searchBarA').value == "") {
+    document.getElementById("listOfOptions").style.opacity = "0%";
+    document.getElementById("listOfOptions").style.visibility = "hidden";
+  }
+  //get text
+  let txt = document.getElementById("searchBarA").value.toUpperCase();
+  console.log(cityData.city[0]);
 }
