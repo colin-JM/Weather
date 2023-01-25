@@ -1,4 +1,13 @@
-/* main content */
+/* vars */
+
+:root {
+  /*colors*/
+  --white: #fff;
+  --light-white: #fff;
+  /* standards */
+  --rad: 25px;
+}
+  /* main content */
 
 .hero {
   background-color: #ECF0F1;
@@ -84,7 +93,7 @@
   color: #fff;
   margin-top: 5%;
 }
-
+/* above converted */
 #icon, #dayOneIcon, #dayTwoIcon, #dayThreeIcon, #dayFourIcon, #dayFiveIcon {
   font-size: 5vw;
   margin: 10% auto 0% auto;
