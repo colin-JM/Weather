@@ -199,7 +199,7 @@ h5 {
 }
 
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 767px) {
   .newFooter {
   display: grid; 
   grid-template-columns: 1fr; 
@@ -211,6 +211,7 @@ h5 {
     "footerSquare3"
     "footerSquare4"
     "bottomFooter"; 
+    height: 50vh;
   }
   .footerSquare1 { grid-area: footerSquare1; }
   .bottomFooter { 
@@ -223,11 +224,11 @@ h5 {
 
   footer {
     background-color: #1F618D;
-    height: 70vh;
+    height: 80vh;
     position: relative;
     top: 0px;
   }
   .bottomFooter h6{
-    font-size: 3vw;
+    font-size: 2vw;
   }
 }

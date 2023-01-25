@@ -210,7 +210,7 @@
 
 /* scaling */
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 1023px) {
   .hero {
     height: 200vh;
   }
@@ -271,11 +271,14 @@
   
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 767px) {
   .hero {
     height: 100vh;
   }
   .locPrompt {
+    height: 100vh;
+  }
+  .content-box {
     height: 100vh;
   }
   .inner-grid {
@@ -286,7 +289,7 @@
   grid-template-areas: 
     "today"
     "forecast";
-  height: 200vh;
+  height: 100vh;
   }
   .forecast {
     grid-area: forecast;
