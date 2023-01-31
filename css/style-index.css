@@ -93,7 +93,7 @@
   color: #fff;
   margin-top: 5%;
 }
-/* above converted */
+
 #icon, #dayOneIcon, #dayTwoIcon, #dayThreeIcon, #dayFourIcon, #dayFiveIcon {
   font-size: 5vw;
   margin: 10% auto 0% auto;
@@ -108,7 +108,7 @@
 #dayOneIcon, #dayTwoIcon, #dayThreeIcon, #dayFourIcon, #dayFiveIcon {
   color: #000;
 }
-
+/* above converted */
 .city {
   text-align: center;
   margin: 1vh 1.5vw;

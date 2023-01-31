@@ -124,25 +124,25 @@ async function fetchData(latitude, longitude) {
   //day 2
   document.getElementById("dayTwo").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-    modifyTempChart(record, 48);
+    modifyTempChart(record, 24);
     calculatePrecipVaL(record,1,dayOfWeek);
   }, false);
   //day 3
   document.getElementById("dayThree").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-    modifyTempChart(record, 72);
+    modifyTempChart(record, 48);
     calculatePrecipVaL(record,2,dayOfWeek);
   }, false);
   //day 4
   document.getElementById("dayFour").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-    modifyTempChart(record, 96);
+    modifyTempChart(record, 72);
     calculatePrecipVaL(record,3,dayOfWeek);
   }, false);
   //day 5
   document.getElementById("dayFive").addEventListener("click", (event) => {
     changeGraph("#ECF0F1", event);
-    modifyTempChart(record, 120);
+    modifyTempChart(record, 96);
     calculatePrecipVaL(record,4,dayOfWeek);
   }, false);
 }
