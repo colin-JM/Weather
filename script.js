@@ -479,16 +479,16 @@ function calculatePrecipVaL(record, index, dayOfWeek) {
   if (day > 6) {
     day -= 7;
   }
-  if ((record.daily.snowfall_sum[index] > record.daily.rain_sum[index]) && (record.daily.snowfall_sum[index]*0.393701 >= 0.01)) {
-    document.getElementById("precipReading").innerHTML = (record.daily.snowfall_sum[index]*0.393701).toString().slice(0,4) + " inches of snowfall expected ";
+  if ((record.daily.snowfall_sum[index] > record.daily.rain_sum[index]) && (record.daily.snowfall_sum[index] >= 0.03)) {
+    document.getElementById("precipReading").innerHTML = (record.daily.snowfall_sum[index]).toString().slice(0,4) + " inches of snowfall expected ";
     if (index != 0) {
       document.getElementById("precipReading").innerHTML += getDayString(day);
     } else {
       document.getElementById("precipReading").innerHTML += "today";
     }
     document.getElementById("precipIcon").innerHTML = "weather_snowy";
-  } else if (record.daily.rain_sum[index]*0.393701 >= 0.01) {
-    document.getElementById("precipReading").innerHTML = (record.daily.rain_sum[index]*0.393701).toString().slice(0,4) + " inches of rain expected ";
+  } else if (record.daily.rain_sum[index] >= 0.03) {
+    document.getElementById("precipReading").innerHTML = (record.daily.rain_sum[index]).toString().slice(0,4) + " inches of rain expected ";
     if (index != 0) {
       document.getElementById("precipReading").innerHTML += getDayString(day);
     } else {
