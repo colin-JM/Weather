@@ -18,7 +18,7 @@ This is a relatively new project, and I will try to update this as I continue wo
 - [X] Weekly Forecast
 - [X] Hourly Temp Graph
 - [ ] Search for city
-- [ ] Hourly Temp Graph per Selected Day
+- [X] Hourly Temp Graph per Selected Day
 - [ ] Mobile Viewing
 - [ ] Dark Mode
 - [ ] Other Pages
